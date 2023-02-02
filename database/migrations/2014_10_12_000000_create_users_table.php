@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Query\Expression;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('avatar')->default("avatar.jpg");
             $table->longText('bio')->nullable();
             $table->string('password');
-            $table->text('roles_name')->default("user");
+            $table->json('roles_name')->default(new Expression('(JSON_ARRAY("user"))'));
             $table->string('Status', 10)->default("مفعل");
             $table->rememberToken();
             $table->timestamps();

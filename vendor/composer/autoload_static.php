@@ -612,7 +612,7 @@ class ComposerStaticInit79757e78c384cce7bae24186701fc057
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Http\\trait\\ImageTrait' => __DIR__ . '/../..' . '/app/Http/trait/ImageTrait.php',
+        'App\\Http\\traits\\ImageTrait' => __DIR__ . '/../..' . '/app/Http/traits/ImageTrait.php',
         'App\\Models\\ColorTheme' => __DIR__ . '/../..' . '/app/Models/ColorTheme.php',
         'App\\Models\\Companies' => __DIR__ . '/../..' . '/app/Models/Companies.php',
         'App\\Models\\CompanyServices' => __DIR__ . '/../..' . '/app/Models/CompanyServices.php',
