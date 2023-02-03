@@ -27,6 +27,7 @@ class User extends Authenticatable
         'Status',
         'avatar',
         'bio',
+        'type',
     ];
 
     /**
@@ -47,4 +48,14 @@ class User extends Authenticatable
     protected $casts = [
         'roles_name' => 'array',
     ];
+
+    
+    /**
+     * Interact with the user's first name.
+     *
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+
+
 }

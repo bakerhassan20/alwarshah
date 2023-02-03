@@ -42,6 +42,7 @@ class LoginController extends Controller
     {
         return ['phone' => $request->phone, 'password' => $request->password, 'status' => 'مفعل'];
     }
+    
 
     public function username(){
         return 'phone';

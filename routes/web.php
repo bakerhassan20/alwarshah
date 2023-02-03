@@ -1,9 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\website\WebsiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,37 +18,56 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
+Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('guest');
+    /*------------------------------------------
+    --------------------------------------------
+    All Admin Routes List
+    --------------------------------------------
+    --------------------------------------------*/
+    Route::prefix('/admin')->middleware(['auth', 'user-access:admin'])->group(function () {
 
-Route::get('theme',[App\Http\Controllers\HomeController::class,'theme'])->name('theme');
+        Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
-Route::resource('sections','App\Http\Controllers\SectionsController');
+        Route::get('theme',[HomeController::class,'theme'])->name('theme');
+        Route::resource('sections','App\Http\Controllers\SectionsController');
+        Route::resource('services','App\Http\Controllers\ServicesController');
+        Route::resource('companys','App\Http\Controllers\CompaniesController');
+        Route::get('/section/{id}','App\Http\Controllers\SectionsController@getproducts');
 
-Route::resource('services','App\Http\Controllers\ServicesController');
+        Route::resource('roles','App\Http\Controllers\RoleController');
+        Route::resource('users','App\Http\Controllers\UserController');
 
-Route::resource('companys','App\Http\Controllers\CompaniesController');
+    Route::prefix('/admin/profile')->name('profile.')->middleware('auth')->group(function () {
+        Route::get('/',[ProfileController::class,'index'])->name('index');
+        Route::get('/edit',[ProfileController::class,'edit'])->name('edit');
+        Route::put('/update',[ProfileController::class,'update'])->name('update');
+        Route::put('/update-password',[ProfileController::class,'update_password'])->name('update-password');
+        Route::put('/update-phone',[ProfileController::class,'update_phone'])->name('update-phone');
+    });
 
-Route::get('/section/{id}','App\Http\Controllers\SectionsController@getproducts');
+    });
 
-Route::prefix('profile')->name('profile.')->group(function () {
-    Route::get('/',[ProfileController::class,'index'])->name('index');
-    Route::get('/edit',[ProfileController::class,'edit'])->name('edit');
-    Route::put('/update',[ProfileController::class,'update'])->name('update');
-    Route::put('/update-password',[ProfileController::class,'update_password'])->name('update-password');
-    Route::put('/update-phone',[ProfileController::class,'update_phone'])->name('update-phone');
-});
+    /*------------------------------------------
+    --------------------------------------------
+    All Admin Routes List
+    --------------------------------------------
+    --------------------------------------------*/
+    Route::middleware(['auth', 'user-access:service_provider'])->group(function () {
+
+        Route::get('/home', [HomeController::class, 'service_provider'])->name('service_provider.home');
+    });
+
+
+
+
+
 
 
 Route::resource('invoices','App\Http\Controllers\InvoicesController');
-
-
 
 
 
@@ -76,13 +98,6 @@ Route::get('Invoice_Partial','App\Http\Controllers\InvoicesController@Invoice_Pa
 Route::get('Print_invoice/{id}','App\Http\Controllers\InvoicesController@Print_invoice');
 
 Route::get('export_invoices','App\Http\Controllers\InvoicesController@export');
-
-Route::group(['middleware' => ['auth']], function() {
-
-    Route::resource('roles','App\Http\Controllers\RoleController');
-    Route::resource('users','App\Http\Controllers\UserController');
-
-    });
 
 
 

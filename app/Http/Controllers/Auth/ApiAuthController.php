@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 use App\Models\User;
+use App\Models\sections;
+use App\Models\services;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Calculation\Web\Service;
+
 
 class ApiAuthController extends Controller
 {
@@ -22,20 +26,21 @@ class ApiAuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response(['errors'=>$validator->errors()->all()], 422);
+            return response(['message'=>$validator->errors()->all()], 422);
         }
 
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'type'=>"customer",
          ]);
         $user->assignRole('user');
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
+        $sections = sections::all();
         return response()
-            ->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
+            ->json(['user_data' => $user,'sections'=>$sections,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
     }
 
 
@@ -44,15 +49,17 @@ class ApiAuthController extends Controller
         if (!Auth::attempt($request->only('phone', 'password')))
         {
             return response()
-                ->json(['message' => 'Unauthorized'], 401);
+                ->json(['message' => ['Unauthorized']], 401);
         }
 
         $user = User::where('phone', $request['phone'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $sections = sections::all();
+
         return response()
-            ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+            ->json(['user_data' => $user,'sections'=>$sections,'access_token' => $token, 'token_type' => 'Bearer', ]);
     }
 
 

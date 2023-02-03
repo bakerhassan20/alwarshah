@@ -20,6 +20,7 @@ public function run()
         'password' => bcrypt('12345678'),
         'roles_name' => ["owner"],
         'Status' => 'مفعل',
+        'type'=>"admin",
         ]);
 
         $role = Role::create(['name' => 'owner']);
@@ -31,4 +32,3 @@ public function run()
         $user->assignRole([$role->id]);
     }
 }
-  

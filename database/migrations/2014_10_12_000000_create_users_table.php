@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->json('roles_name')->default(new Expression('(JSON_ARRAY("user"))'));
             $table->string('Status', 10)->default("مفعل");
+            $table->string('type')->default('service_provider');
             $table->rememberToken();
             $table->timestamps();
         });
