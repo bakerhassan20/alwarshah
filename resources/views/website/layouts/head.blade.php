@@ -29,4 +29,5 @@
     <!-- Template Stylesheet -->
     <link href="{{URL::asset('assets/website/css/style.css')}}" rel="stylesheet">
 
+    <link href="{{URL::asset('assets/website/css/app.css')}}" rel="stylesheet">
 

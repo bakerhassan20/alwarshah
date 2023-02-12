@@ -67,14 +67,14 @@ return redirect()->route('roles.index')
 * @param  int  $id
 * @return \Illuminate\Http\Response
 */
-public function show($id)
-{
-$role = Role::find($id);
-$rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-->where("role_has_permissions.role_id",$id)
-->get();
-return view('roles.show',compact('role','rolePermissions'));
-}
+        public function show($id)
+        {
+            $role = Role::find($id);
+            $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+            ->where("role_has_permissions.role_id",$id)
+            ->get();
+            return view('roles.show',compact('role','rolePermissions'));
+        }
 /**
 * Show the form for editing the specified resource.
 *

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Otp;
+use App\Models\User;
 use App\Models\invoices;
 use App\Models\ColorTheme;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 class HomeController extends Controller
 {
     /**
@@ -30,13 +34,14 @@ class HomeController extends Controller
 
     public function service_provider()
     {
-         return view('service_provider.home');
+        return view('website.home');
     }
 
     public function index()
     {
         return view('website.home');
     }
+
 
 
 
@@ -56,5 +61,6 @@ class HomeController extends Controller
         }
         return response()->json(['message'=>$theme->mode]);
         }
-    }
+
+}
 
