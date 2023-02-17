@@ -33,14 +33,14 @@ class ApiAuthController extends Controller
 
         $user = User::where('phone',$request->phone)->first();
         if($user){
-            if ($user->type == 'customer'){
+          /*   if ($user->type == 'customer'){ */
                 $token = $user->createToken('auth_token')->plainTextToken;
                 return response()
                     ->json(['user_data' => $user,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
-            }else{
+      /*       }else{ */
                 return response()
                 ->json(['message' => ['Unauthorized']], 401);
-            }
+        /*     } */
 
         }else{
             $user = User::create([
