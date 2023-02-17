@@ -24,7 +24,7 @@ public function run()
         ]);
 
         $role = Role::create(['name' => 'owner']);
-
+        $role2 = Role::create(['name' => 'user']);
         $permissions = Permission::pluck('id','id')->all();
 
         $role->syncPermissions($permissions);

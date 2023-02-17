@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/login', [ApiAuthController::class,'login'])->name('login.api');
-Route::post('/register',[ApiAuthController::class,'register'])->name('register.api');
+/* Route::post('/register',[ApiAuthController::class,'register'])->name('register.api'); */
 
 
 
@@ -32,6 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::post('/sendOtp',[ApiAuthController::class,'sendOtp']);
+/* Route::post('/sendOtp',[ApiAuthController::class,'sendOtp']);
 Route::post('/verifyOpt',[ApiAuthController::class,'verifyOpt']);
-Route::post('change_password', [ApiAuthController::class,'change_password']);
+Route::post('change_password', [ApiAuthController::class,'change_password']); */

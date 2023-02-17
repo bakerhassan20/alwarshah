@@ -20,49 +20,67 @@ class ApiAuthController extends Controller
 {
 
 
-    public function register(Request $request)
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|string|max:255',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:users,phone',
-            'password' => 'required|string|min:8|confirmed'
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
         ]);
 
         if($validator->fails()){
             return response(['message'=>$validator->errors()->all()], 422);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'type'=>"customer",
-         ]);
-        $user->assignRole('user');
 
+        $user = User::where('phone',$request->phone)->first();
+        if($user){
+            if ($user->type == 'customer'){
+                $token = $user->createToken('auth_token')->plainTextToken;
+                return response()
+                    ->json(['user_data' => $user,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
+            }else{
+                return response()
+                ->json(['message' => ['Unauthorized']], 401);
+            }
+
+        }else{
+            $user = User::create([
+                'name' => 'customer',
+                'phone' => $request->phone,
+                'type'=>"customer",
+                'password'=>"12345678",
+             ]);
+
+        $user->assignRole('user');
         $token = $user->createToken('auth_token')->plainTextToken;
-        $sections = sections::all();
         return response()
-            ->json(['user_data' => $user,'sections'=>$sections,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
+        ->json(['user_data' => $user,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
+        }
+
     }
 
-
+/*
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('phone', 'password')))
+        if (!Auth::attempt($request->only('phone')))
         {
             return response()
                 ->json(['message' => ['Unauthorized']], 401);
         }
+         if (auth()->user()->type == 'customer'){
 
-        $user = User::where('phone', $request['phone'])->firstOrFail();
+            $user = User::where('phone', $request['phone'])->firstOrFail();
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+            $token = $user->createToken('auth_token')->plainTextToken;
 
-        $sections = sections::all();
+            $sections = sections::all();
 
-        return response()
-            ->json(['user_data' => $user,'sections'=>$sections,'access_token' => $token, 'token_type' => 'Bearer', ]);
+            return response()
+                ->json(['user_data' => $user,'sections'=>$sections,'access_token' => $token, 'token_type' => 'Bearer', ]);
+         }else{
+            return response()
+                ->json(['message' => ['Unauthorized']], 401);
+        }
+
     }
 
 
@@ -173,6 +191,6 @@ class ApiAuthController extends Controller
 
 
 
-    }
+    } */
 
 }
