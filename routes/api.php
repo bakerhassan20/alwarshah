@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Auth\ApiAuthController;
 
 /*
@@ -22,16 +23,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/login', [ApiAuthController::class,'login'])->name('login.api');
-/* Route::post('/register',[ApiAuthController::class,'register'])->name('register.api'); */
+
 
 
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    Route::get('/slide', [HomeController::class,'Slide']);
+    Route::get('/products', [HomeController::class,'Products']);
+    Route::get('/product/{id}', [HomeController::class,'getProduct']);
+
     Route::post('/logout', [ApiAuthController::class,'logout'])->name('logout.api');
 });
 
 
-/* Route::post('/sendOtp',[ApiAuthController::class,'sendOtp']);
-Route::post('/verifyOpt',[ApiAuthController::class,'verifyOpt']);
-Route::post('change_password', [ApiAuthController::class,'change_password']); */

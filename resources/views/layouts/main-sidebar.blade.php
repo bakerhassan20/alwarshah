@@ -150,11 +150,11 @@
                         </svg><span class="side-menu__label">الاعدادات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         @can('الاقسام')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'sections')) }}">الاقسام</a></li>
+                            <li><a class="slide-item" href="{{ route('services.index') }}">الاقسام</a></li>
                         @endcan
 
                         @can('الخدمات')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'services')) }}">الخدمات</a></li>
+                            <li><a class="slide-item" href="{{ route('sub_services.index') }}">الخدمات</a></li>
                         @endcan
                     </ul>
                 </li>

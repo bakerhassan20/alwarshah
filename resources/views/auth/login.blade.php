@@ -1,88 +1,65 @@
 @extends('layouts.master2')
 
 @section('title')
-تسجيل الدخول - مورا سوفت للادارة القانونية
+login
 @stop
 
 
 @section('css')
 <!-- Sidemenu-respoansive-tabs css -->
-<link href="{{URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/css/login.css')}}" rel="stylesheet">
 @endsection
 @section('content')
-		<div class="container-fluid">
-			<div class="row no-gutter">
-				<!-- The image half -->
-				<!-- The content half -->
-				<div class="col-md-6 col-lg-6 col-xl-5 bg-white">
-					<div class="login d-flex align-items-center py-2">
-						<!-- Demo content-->
-						<div class="container p-0">
-							<div class="row">
-								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-									<div class="card-sigin">
-										<div class="mb-5 d-flex"> <a href="{{ url('/' . $page='Home') }}"><img src="{{URL::asset('assets/img/brand/favicon.jpeg')}}" class="sign-favicon ht-200 w-100" alt="logo"></a></div>
-										<div class="card-sigin">
-											<div class="main-signup-header">
-												<h2>مرحبا بك</h2>
-												<h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
-                                                <form method="POST" action="{{ route('login') }}">
-                                                {{csrf_field()}}
-													<div class="form-group">
-													<label> الهاتف</label>
-                                                    <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
-                                                     @error('phone')
-                                                     <span class="invalid-feedback" role="alert">
-                                                     <strong>{{ $message }}</strong>
-                                                     </span>
-                                                     @enderror
-													</div>
+ <div class="wave-login"></div>
+      <div class="wave2-login"></div>
+      <div class="wave3-login"></div>
+      <div class="container-login"dir="ltr">
+        <div class="img"></div>
+      <div class="login-content">
+        <form action="{{ route('login') }}"method="POST" >
+          @csrf
+          <h2 class="title-login">Welcome To</h2>
+          <h1>Elwarsha</h1>
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="div">
+              <label>phone</label>
+              <input type="number"  autocomplete="false" readonly onfocus="this.removeAttribute('readonly');" class="input @error('phone') is-invalid @enderror" name="phone"value="{{ old('phone') }}" required />
+              @error('phone')
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            </div>
+          </div>
+          <div class="input-div pass">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="div">
+              <label>Password</label>
+              <input type="password" autocomplete="false" readonly onfocus="this.removeAttribute('readonly');" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+            </div>
+          </div><br>
+          <div class="check">
+            <input type="checkbox" id="rem" name="remember" value="Boat" required {{ old('remember') ? 'checked' : '' }}/>
+            <label for="rem"> remember me</label>
+          </div>
+          <input type="submit" name="submit" class="btn" value="Login" />
+          <div class="flex">
+            <p>Don't have an acount?</p>
+            <a href="{{ route('register') }}">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </div>
 
-												 <div class="form-group">
-											 	 <label>كلمة المرور</label>
 
-                                                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                                  @error('password')
-                                                  <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                                  </span>
-												  @enderror
-                                                  <div class="form-group row">
-                                                      <div class="col-md-6 offset-md-4">
-                                                           <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <label class="form-check-label" for="remember">
-                                                                       {{ __('تذكرني') }}
-                                                                </label>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-												  </div>
-                                                    <button type="submit" class="btn btn-main-primary btn-block">
-                                                    {{ __('تسجيل الدخول') }}
-                                                    </button>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div><!-- End -->
-					</div>
-				</div><!-- End -->
-
-                <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
-					<div class="row wd-100p mx-auto text-center">
-						<div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-							<img src="{{URL::asset('assets/img/media/login.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
 @endsection
 @section('js')
+<script src="{{URL::asset('assets/js/login.js')}}"></script>
 @endsection
+
+

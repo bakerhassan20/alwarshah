@@ -24,6 +24,9 @@ use App\Http\Controllers\website\ServiceProviderController;
 Auth::routes();
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('guest');
+Route::get('/complete', function(){
+  return view('auth.complete');
+});
     /*------------------------------------------
     --------------------------------------------
     All Admin Routes List
@@ -34,8 +37,8 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
         Route::get('theme',[HomeController::class,'theme'])->name('theme');
-        Route::resource('sections','App\Http\Controllers\SectionsController');
-        Route::resource('services','App\Http\Controllers\ServicesController');
+        Route::resource('services','App\Http\Controllers\Admin\ServicesController');
+        Route::resource('sub_services','App\Http\Controllers\Admin\SubServicesController');
         Route::resource('companys','App\Http\Controllers\CompaniesController');
         Route::get('/section/{id}','App\Http\Controllers\SectionsController@getproducts');
 
@@ -64,7 +67,7 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
 
     });
 
-    Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_all')->name('MarkAsRead_all');
+Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_all')->name('MarkAsRead_all');
 
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
 
