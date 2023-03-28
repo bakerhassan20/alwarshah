@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Slide;
 use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -45,6 +46,18 @@ class HomeController extends Controller
         }
 
     }
+
+    public function Service(){
+        $service = Service::where('active',1)->get();
+        if($service){
+            return response()
+            ->json(['data' => $service,'Status'=>200]);
+        }else{
+            return response()
+            ->json(['message' => ['data not found']], 404);
+        }
+
+    }
     public function getProduct($id){
         $product = Product::find($id);
         if($product){
@@ -55,5 +68,17 @@ class HomeController extends Controller
             ->json(['message' => ['data not found']], 404);
         }
 
+    }
+
+    public function getProfile(Request $request){
+       $user = auth('sanctum')->user();
+
+       if($user){
+            return response()
+            ->json(['data' => $user,'Status'=>200]);
+        }else{
+            return response()
+        ->json(['message' => ['data not found']], 404);
+        }
     }
 }

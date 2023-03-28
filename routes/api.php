@@ -30,9 +30,10 @@ Route::post('/login', [ApiAuthController::class,'login'])->name('login.api');
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/slide', [HomeController::class,'Slide']);
+    Route::get('/services', [HomeController::class,'Service']);
     Route::get('/products', [HomeController::class,'Products']);
     Route::get('/product/{id}', [HomeController::class,'getProduct']);
-
+    Route::get('/profile', [HomeController::class,'getProfile']);
     Route::post('/logout', [ApiAuthController::class,'logout'])->name('logout.api');
 });
 

@@ -33,13 +33,13 @@ label span{
       <div class="container-login"dir="ltr">
         <div class="img"></div>
       <div class="login-content">
-        <form action="index.html">
+        <form action="{{ route('storeinfo') }}" method="post">
+          @csrf
           <h2 class="title-login">Complete Your information</h2>
     <ul>
       <li class="active current1"> <span class="span"> 1 </span> tab 1 </li>
       <li>  <span class="span"> 2 </span> tab 2 </li>
       <li>  <span class="span"> 3 </span> tab 3 </li>
-
     </ul>
 
 
@@ -51,7 +51,7 @@ label span{
               </div>
               <div class="div">
                 <label>company Name</label>
-                <input type="text" class="input" name="phone" required />
+                <input type="text" class="input" name="name" required />
               </div>
             </div>
 
@@ -59,52 +59,24 @@ label span{
 
            <!--      <label>Service</label><br> -->
            <div class="col sele">
-			<label>Choice Service</label><select class="form-control select2-no-search">
-				<option label="Choose one"></option>
-				<option value="Firefox">
-					Service 1
+			<label>Choice Service</label>
+                <select id="services"name="services" class="form-control select2-no-search" required>
+                 <option value="">Choose one</option>
+                @foreach ($services as $service)
+				    <option value="{{ $service->id }}">
+					{{ $service->name}}
 					</option>
-											<option value="Chrome">
-												Service 2
-											</option>
-											<option value="Safari">
-												Service 3
-											</option>
-											<option value="Opera">
-												Service 4
-											</option>
-											<option value="Internet Explorer">
-												Service 5
-											</option>
-										</select>
-									</div><!-- col-4 -->
+                @endforeach
+				</select>
+			</div><!-- col-4 -->
 
               </div>
 
 
         <div id="div2">
-            <div class="row">
+            <div class="row" id="sub_service">
 
-    <label class="checkbox  col-4  h5"style="">
-      <span>value</span>
-       <input class="icheck-green largerCheckbox"type="checkbox" name="permission[]" id="value" value="value">
-        </label>
-        <label class="checkbox  col-4  h5"style="">
-      <span>value</span>
-       <input class="icheck-green largerCheckbox"type="checkbox" name="permission[]" id="value" value="value">
-        </label>
-        <label class="checkbox  col-4  h5"style="">
-      <span>value</span>
-       <input class="icheck-green largerCheckbox"type="checkbox" name="permission[]" id="value" value="value">
-        </label>
-        <label class="checkbox  col-4  h5"style="">
-      <span>value</span>
-       <input class="icheck-green largerCheckbox"type="checkbox" name="permission[]" id="value" value="value">
-        </label>
-        <label class="checkbox  col-4  h5"style="">
-      <span>value</span>
-       <input class="icheck-green largerCheckbox"type="checkbox" name="permission[]" id="value" value="value">
-        </label>
+               <h5 style="margin-left:15px">Please Choose Service First</h5>
 </div><br>
         </div>
 
@@ -117,7 +89,7 @@ label span{
 		<div class="row row-sm">
 		<div class="col-sm-7 col-md-6 col-lg-4">
 		<div class="custom-file">
-	<input class="custom-file-input" id="customFile" type="file"> <label class="custom-file-label" for="customFile">Choose file</label>
+	<input class="custom-file-input" name="img" id="customFile" type="file" required> <label class="custom-file-label" for="customFile">Choose file</label>
 	</div>
 		</div>
 	</div><br>
@@ -139,7 +111,55 @@ label span{
 
                           <div id="map" style="height:180px; width: 350px;" class="my-3"></div>
 
+
+            </div>
+
+    </div>
+    </div>
+
+        <button id="prev"class="btn">Prev</button>
+
+        <button id="next"class="btn">Next</button>
+        <button id="submit" type="submit" class="btn btn-success submit text-center">Submit</button>
+
+      </form>
+    </div>
+  </div>
+
+
+
+@endsection
+@section('js')
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="{{URL::asset('assets/js/complete.js')}}"></script>
+
                 <script>
+
+ $('#services').on('change', function() {
+
+ var id=$('#services').val();
+ if(id == ''){
+        var model = $('#sub_service');
+            model.empty();
+            model.append("<h5 style='margin-left:15px'>Please Choose Service First</h5>");
+ }else{
+            $.get("/getSubService/" + id,
+                    function(data) {
+                        var model = $('#sub_service');
+                        model.empty();
+
+                        $.each(data, function(index, element) {
+                          model.append("<label class='checkbox  col-4  h5'><span>"+ element.name +"</span><input class='icheck-green largerCheckbox'type='checkbox' name='sub_service[]' id='value' value="+ element.id +"></label>");
+                        });
+                    });
+ }
+
+          });
+                </script>
+                <script>
+
                     let map;
                     function initMap() {
                         map = new google.maps.Map(document.getElementById("map"), {
@@ -173,26 +193,6 @@ label span{
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
                         type="text/javascript">
                 </script>
-
-            </div>
-
-    </div>
-    </div>
-
-        <button id="prev"class="btn">Prev</button>
-
-        <button id="next"class="btn">Next</button>
-        <button id="submit" type="submit" class="btn btn-success submit text-center">Submit</button>
-
-      </form>
-    </div>
-  </div>
-
-
-
-@endsection
-@section('js')
-<script src="{{URL::asset('assets/js/complete.js')}}"></script>
 @endsection
 
 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Service;
 use App\Http\Controllers;
+use App\Models\Companies;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -24,9 +26,7 @@ use App\Http\Controllers\website\ServiceProviderController;
 Auth::routes();
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('guest');
-Route::get('/complete', function(){
-  return view('auth.complete');
-});
+
     /*------------------------------------------
     --------------------------------------------
     All Admin Routes List
@@ -65,6 +65,20 @@ Route::get('/complete', function(){
         Route::get('/home', [HomeController::class, 'service_provider'])->name('service_provider.home');
         Route::get('/profile', [ServiceProviderController::class, 'profile'])->name('profile');
 
+
+        Route::get('/complete', function(){
+            $company=Companies::where('user_id', Auth::user()->id)->first();
+            if($company){
+                return redirect()->route('service_provider.home');
+            }else{
+                $services = Service::where('active',1)->get();
+                return view('auth.complete',compact('services'));
+            }
+        });
+
+
+        Route::get('/getSubService/{id}', [ServiceProviderController::class, 'getSubService']);
+        Route::post('/storeinfo', [ServiceProviderController::class, 'storeInfo'])->name('storeinfo');
     });
 
 Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_all')->name('MarkAsRead_all');
