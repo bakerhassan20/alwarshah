@@ -27,6 +27,10 @@ label span{
 </style>
 @endsection
 @section('content')
+
+
+
+
     <div class="wave-login"></div>
       <div class="wave2-login"></div>
       <div class="wave3-login"></div>
@@ -57,42 +61,36 @@ label span{
 
 
 
-           <!--      <label>Service</label><br> -->
-           <div class="col sele">
-			<label>Choice Service</label>
-                <select id="services"name="services" class="form-control select2-no-search" required>
-                 <option value="">Choose one</option>
-                @foreach ($services as $service)
-				    <option value="{{ $service->id }}">
-					{{ $service->name}}
-					</option>
-                @endforeach
-				</select>
-			</div><!-- col-4 -->
 
+           <div class="col seled">
+            <label style=" display: flex;justify-content: left;color: #999;font-size: 16px;margin-left: 13px;">Choice Photo</label>
+                <div class="row row-sm">
+                <div class="col-sm-7 col-md-6 col-lg-4">
+                <div class="custom-file">
+                    <input class="custom-file-input" name="img" id="customFile" type="file" required> <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+                </div>
+            </div><br>
+		</div><!-- col-4 -->
               </div>
 
-
         <div id="div2">
-            <div class="row" id="sub_service">
-
-               <h5 style="margin-left:15px">Please Choose Service First</h5>
-</div><br>
-        </div>
-
-        <div id="div3" class="last">
-        <label style=" display: flex;
+                       <label style=" display: flex;
 	justify-content: left;
 	color: #999;
 	font-size: 16px;
-    margin-left: 13px;">Choice Photo</label>
-		<div class="row row-sm">
-		<div class="col-sm-7 col-md-6 col-lg-4">
-		<div class="custom-file">
-	<input class="custom-file-input" name="img" id="customFile" type="file" required> <label class="custom-file-label" for="customFile">Choose file</label>
-	</div>
-		</div>
-	</div><br>
+    margin-left: 13px;">Choice Service</label>
+
+  <div class="row" id="sub_service">
+    @foreach ($services as $service)
+              <label class='checkbox  col-4  h5'><span>{{ $service->name }}</span><input class='icheck-green largerCheckbox'type='checkbox' name='service[]' value="{{ $service->id }}"></label>
+               @endforeach
+            </div><br>
+
+
+        </div>
+
+        <div id="div3" class="last">
           {{-- 4 --}}
                             <label style=" display: flex;
 	justify-content: left;
@@ -135,29 +133,7 @@ label span{
 
 <script src="{{URL::asset('assets/js/complete.js')}}"></script>
 
-                <script>
 
- $('#services').on('change', function() {
-
- var id=$('#services').val();
- if(id == ''){
-        var model = $('#sub_service');
-            model.empty();
-            model.append("<h5 style='margin-left:15px'>Please Choose Service First</h5>");
- }else{
-            $.get("/getSubService/" + id,
-                    function(data) {
-                        var model = $('#sub_service');
-                        model.empty();
-
-                        $.each(data, function(index, element) {
-                          model.append("<label class='checkbox  col-4  h5'><span>"+ element.name +"</span><input class='icheck-green largerCheckbox'type='checkbox' name='sub_service[]' id='value' value="+ element.id +"></label>");
-                        });
-                    });
- }
-
-          });
-                </script>
                 <script>
 
                     let map;

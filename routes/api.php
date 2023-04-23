@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Auth\ApiAuthController;
 
 /*
@@ -35,6 +36,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/product/{id}', [HomeController::class,'getProduct']);
     Route::get('/profile', [HomeController::class,'getProfile']);
     Route::post('/logout', [ApiAuthController::class,'logout'])->name('logout.api');
+
+    //Orders
+    Route::post('/MakeWinchOrder',[OrderController::class,'MakeWinchOrder']);
+    Route::post('/MakeCleanOrder',[OrderController::class,'MakeCleanOrder']);
+    Route::post('/MakeFuelOrder',[OrderController::class,'MakeFuelOrder']);
+    Route::post('/MakeRepairOrder',[OrderController::class,'MakeRepairOrder']);
+
+    //get all repair service
+    Route::get('/RepairService', [OrderController::class,'RepairService']);
 });
 
 

@@ -5,7 +5,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
     <!-- Favicon -->
     <link href="{{URL::asset('assets/website/img/favicon.ico')}}" rel="icon">
 
@@ -23,6 +22,7 @@
     <link href="{{URL::asset('assets/website/lib/owlcarousel/assets/owl.carousel.min.css')}}"rel="stylesheet">
     <link href="{{URL::asset('assets/website/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
 
+
     <!-- Customized Bootstrap Stylesheet -->
    <link href="{{URL::asset('assets/website/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -30,4 +30,7 @@
     <link href="{{URL::asset('assets/website/css/style.css')}}" rel="stylesheet">
 
     <link href="{{URL::asset('assets/website/css/app.css')}}" rel="stylesheet">
+
+@yield('css')
+
 

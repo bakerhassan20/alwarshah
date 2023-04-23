@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Website\OrderController;
 use App\Http\Controllers\website\WebsiteController;
 use App\Http\Controllers\website\ServiceProviderController;
 /*
@@ -62,9 +63,20 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
     --------------------------------------------*/
     Route::middleware(['auth', 'user-access:service_provider'])->group(function () {
 
+        Route::get('/complete', function(){
+            $company=Companies::where('user_id', Auth::user()->id)->first();
+            if($company){
+                return redirect()->route('service_provider.home');
+            }else{
+                $services = Service::where('active',1)->get();
+                return view('auth.complete',compact('services'));
+            }
+        });
+        Route::post('/storeinfo', [ServiceProviderController::class, 'storeInfo'])->name('storeinfo');
+    });
+    Route::middleware(['auth', 'user-access:service_provider','completeInfo'])->group(function () {
         Route::get('/home', [HomeController::class, 'service_provider'])->name('service_provider.home');
         Route::get('/profile', [ServiceProviderController::class, 'profile'])->name('profile');
-
 
         Route::get('/complete', function(){
             $company=Companies::where('user_id', Auth::user()->id)->first();
@@ -76,10 +88,12 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
             }
         });
 
-
         Route::get('/getSubService/{id}', [ServiceProviderController::class, 'getSubService']);
-        Route::post('/storeinfo', [ServiceProviderController::class, 'storeInfo'])->name('storeinfo');
+
+        Route::get('/Orders', [OrderController::class, 'getOrders'])->name('getOrders');
+        Route::get('/Orders/Winsh/{id}', [OrderController::class, 'getWinshOrders']);
     });
+
 
 Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_all')->name('MarkAsRead_all');
 

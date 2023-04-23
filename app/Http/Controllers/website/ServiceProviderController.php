@@ -4,6 +4,7 @@ namespace App\Http\Controllers\website;
 
 use App\Models\Companies;
 use App\Models\SubService;
+use App\Models\WinchOrder;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CompanyServices;
@@ -30,7 +31,6 @@ class ServiceProviderController extends Controller
 
     $request->validate([
         'name'=>"required|min:3|max:190",
-        'services'=>"required",
         'lat'=>"required",
         'lng'=>"required",
     ]);
@@ -39,17 +39,15 @@ class ServiceProviderController extends Controller
     Companies::create([
         'name' =>$request->name,
         'user_id' =>Auth::user()->id,
-        'service_id' =>$request->services,
         'latitude' =>$request->lat,
         'longitude' =>$request->lng,
     ]);
 
     $company=Companies::where('user_id', Auth::user()->id)->first();
-     foreach($request->sub_service as $sub){
-
+     foreach($request->service as $ser){
         CompanyServices::create([
            'company_id' =>$company->id,
-           'sub_service_id' =>$sub,
+           'service_id' =>$ser,
         ]);
      }
 
@@ -65,4 +63,6 @@ class ServiceProviderController extends Controller
     return redirect()->route('service_provider.home');
 
    }
+
+
 }

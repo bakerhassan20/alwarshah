@@ -17,3 +17,7 @@
 
     <!-- Template Javascript -->
     <script src="{{URL::asset('assets/website/js/main.js')}}"></script>
+
+@yield('js')
+
+

@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_services', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name', 999);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('service_id');
+            $table->string('img')->default("default.jfif");
+            $table->decimal('latitude',8,6);
+            $table->decimal('longitude', 9,6);
             $table->integer('active')->default(0);
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_services');
+        Schema::dropIfExists('companies');
     }
 };
