@@ -16,9 +16,9 @@ class OrderController extends Controller
 
       public function getWinshOrders($id){
 
-        $winsh = WinchOrder::find($id);
+        $winch = WinchOrder::find($id);
 
-        return view('website.orders.winch',compact('winsh'));
+        return view('website.orders.winch',compact('winch'));
 
       }
 }
