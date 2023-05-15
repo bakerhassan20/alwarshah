@@ -43,7 +43,7 @@
           </div>
           <div class="time-left">
            <span class="time"> <i class="fa-solid fa-clock"></i></span>
-           <span style="color:#999;font-size: 18px !important;">{{ $winch->created_at }}</span>
+           <span style="color:#999;font-size: 18px !important;">{{ $winch->created_at->format('Y-m-d h:i') }}</span>
           </div>
         </div>
       </main>
@@ -53,15 +53,46 @@
         <span class="headicone"><img src="{{ URL::asset('assets/img/icon/38824.jpg') }}"></span>
       </div>
 
-      <a href="#" style="margin-left: 380px;" class="btn btn-danger">Add Offer</a>
+      <a  style="margin-left: 380px;" class="modal-effect btn btn-danger" class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8" data-bs-toggle="modal" data-bs-target="#modaldemo8">Add Offer</a>
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="modaldemo8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add offer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    <form action="/Orders/Winch/Offer" method="post">
+        <div class="modal-body">
+                {{csrf_field()}}
+                <input type="hidden" class="form-control" id="id" name="id" value="{{  $winch->id }}">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">price</label>
+                        <input type="number" class="form-control" id="price" name="price">
+                     </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">notes</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
 
 
 @endsection
 
 @section('js')
-
+<script src="{{URL::asset('assets/js/modal.js')}}"></script>
 
 @endsection

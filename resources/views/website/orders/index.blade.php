@@ -102,7 +102,7 @@ $wash = \App\Models\CompanyServices::where('company_id',$company->id)->where('se
 
                                 </div>
                                     <div class="col">
-                                <a href="/Orders/Winsh/{{ $winchOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
+                                <a href="/Orders/Winch/{{ $winchOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
                                 </div>
                                   <div class="row">
                                     <div class="col-3">
@@ -154,7 +154,7 @@ $wash = \App\Models\CompanyServices::where('company_id',$company->id)->where('se
 
                                 </div>
                                     <div class="col">
-                                <a href="/Orders/Winsh/{{ $fuelOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
+                                <a href="/Orders/Fuel/{{ $fuelOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
                                 </div>
                                   <div class="row">
                                     <div class="col-3">
@@ -205,7 +205,7 @@ $wash = \App\Models\CompanyServices::where('company_id',$company->id)->where('se
 
                                 </div>
                                     <div class="col">
-                                <a href="/Orders/Winsh/{{ $repairOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
+                                <a href="/Orders/Repair/{{ $repairOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
                                 </div>
                                   <div class="row">
                                     <div class="col-3">
@@ -238,7 +238,7 @@ $wash = \App\Models\CompanyServices::where('company_id',$company->id)->where('se
         <div class="tab-pane fade" id="tab6danger">
 
        @if ($wash)
-    <?php $washOrders = \App\Models\CleanOrder::where('status',0)->where('isdelete',0)->orderBy('id','desc')->get(); ?>
+    <?php $washOrders = \App\Models\WashOrder::where('status',0)->where('isdelete',0)->orderBy('id','desc')->get(); ?>
 
         <div class="container" style="margin-top:40px;margin-bottom: 60px;">
         <div class="row">
@@ -256,7 +256,7 @@ $wash = \App\Models\CompanyServices::where('company_id',$company->id)->where('se
 
                                 </div>
                                     <div class="col">
-                                <a href="/Orders/Winsh/{{ $washOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
+                                <a href="/Orders/Wash/{{ $washOrder->id }}" class="btn btn-danger btn-sm"> Show Order</a>
                                 </div>
                                   <div class="row">
                                     <div class="col-3">

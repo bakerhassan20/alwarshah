@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\FuelOrder;
-use App\Models\CleanOrder;
+use App\Models\WashOrder;
 use App\Models\UserRepair;
 use App\Models\WinchOrder;
 use App\Models\RepairOrder;
@@ -54,7 +54,7 @@ class OrderController extends Controller
     }
 
 
-    public function MakeCleanOrder(Request $request){
+    public function MakeWashOrder(Request $request){
 
         $validator = Validator::make($request->all(),[
             'service_id'=>'required',
@@ -68,7 +68,7 @@ class OrderController extends Controller
             return response(['message'=>$validator->errors()->all()], 422);
         }
 
-        $cleanOrder = CleanOrder::create([
+        $washOrder = WashOrder::create([
             'user_id'=>Auth::user()->id,
             'service_id'=>$request->service_id,
             'type'=>'clean',
@@ -81,7 +81,7 @@ class OrderController extends Controller
             'description'=>$request->description,
         ]);
 
-        return response()->json(['message' => 'Order sent successfully', 'order'=>$cleanOrder], 200);
+        return response()->json(['message' => 'Order sent successfully', 'order'=>$washOrder], 200);
 
 
     }
@@ -172,5 +172,52 @@ class OrderController extends Controller
     public function RepairService(){
         $repairService = RepairService::all();
         return response()->json(['repairService'=>$repairService], 200);
+    }
+
+    public function AllUserWinchOrder(){
+        $user = auth('sanctum')->user();
+       if($user){
+
+        $userOrders = WinchOrder::where('user_id',$user->id)->get();
+            return response()->json(['data' => $userOrders,'Status'=>200]);
+        }else{
+            return response()
+        ->json(['message' => ['data not found']], 404);
+        }
+    }
+
+    public function AllUserFuelOrder(){
+        $user = auth('sanctum')->user();
+       if($user){
+        $userOrders = FuelOrder::where('user_id',$user->id)->get();
+            return response()->json(['data' => $userOrders,'Status'=>200]);
+        }else{
+            return response()
+        ->json(['message' => ['data not found']], 404);
+        }
+    }
+
+
+
+    public function AllUserRepairOrder(){
+        $user = auth('sanctum')->user();
+       if($user){
+        $userOrders = RepairOrder::where('user_id',$user->id)->get();
+            return response()->json(['data' => $userOrders,'Status'=>200]);
+        }else{
+            return response()
+        ->json(['message' => ['data not found']], 404);
+        }
+    }
+
+    public function AllUserWashOrder(){
+        $user = auth('sanctum')->user();
+       if($user){
+        $userOrders = WashOrder::where('user_id',$user->id)->get();
+            return response()->json(['data' => $userOrders,'Status'=>200]);
+        }else{
+            return response()
+        ->json(['message' => ['data not found']], 404);
+        }
     }
 }

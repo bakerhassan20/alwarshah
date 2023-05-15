@@ -91,7 +91,17 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
         Route::get('/getSubService/{id}', [ServiceProviderController::class, 'getSubService']);
 
         Route::get('/Orders', [OrderController::class, 'getOrders'])->name('getOrders');
-        Route::get('/Orders/Winsh/{id}', [OrderController::class, 'getWinshOrders']);
+
+        Route::get('/Orders/Winch/{id}', [OrderController::class, 'getWinchOrders']);
+        Route::get('/Orders/Fuel/{id}', [OrderController::class, 'getFuelOrders']);
+        Route::get('/Orders/Wash/{id}', [OrderController::class, 'getWashOrders']);
+        Route::get('/Orders/Repair/{id}', [OrderController::class, 'getRepairOrders']);
+
+        Route::post('/Orders/Winch/Offer', [OrderController::class, 'addWinchOffer']);
+        Route::post('/Orders/Fuel/Offer', [OrderController::class, 'addFuelOffer']);
+        Route::post('/Orders/Wash/Offer', [OrderController::class, 'addWashOffer']);
+        Route::post('/Orders/Repair/Offer', [OrderController::class, 'addRepairOffer']);
+
     });
 
 
