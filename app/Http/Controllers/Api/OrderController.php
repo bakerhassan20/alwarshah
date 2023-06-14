@@ -12,6 +12,7 @@ use App\Models\RepairService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderController extends Controller
 {
@@ -34,6 +35,7 @@ class OrderController extends Controller
 
         $winchOrder = WinchOrder::create([
             'user_id'=>Auth::user()->id,
+            'type'=>'winch',
             'car_type'=>$request->car_type,
             'city_from'=>$request->city_from,
             'city_to'=>$request->city_to,
@@ -65,6 +67,7 @@ class OrderController extends Controller
 
         $washOrder = WashOrder::create([
             'user_id'=>Auth::user()->id,
+            'type'=>'wash',
             'car_type'=>$request->car_type,
             'city'=>$request->city,
             'lag'=>$request->lag,
@@ -96,6 +99,7 @@ class OrderController extends Controller
             'user_id'=>Auth::user()->id,
             'car_type'=>$request->car_type,
             'city'=>$request->city,
+            'type'=>'fuel',
             'lag'=>$request->lag,
             'lat'=>$request->lat,
             'b80'=>$request->b80,
@@ -127,6 +131,7 @@ class OrderController extends Controller
 
         $repairOrder = RepairOrder::create([
             'user_id'=>Auth::user()->id,
+            'type'=>'repair',
             'car_type'=>$request->car_type,
             'city'=>$request->city,
             'lag'=>$request->lag,
@@ -157,7 +162,7 @@ class OrderController extends Controller
         $repairService = RepairService::all();
         return response()->json(['repairService'=>$repairService], 200);
     }
-
+/*
     public function AllUserWinchOrder(){
         $user = auth('sanctum')->user();
        if($user){
@@ -192,13 +197,18 @@ class OrderController extends Controller
             return response()
         ->json(['message' => ['data not found']], 404);
         }
-    }
+    } */
 
-    public function AllUserWashOrder(){
+    public function AllUserOrder(){
         $user = auth('sanctum')->user();
        if($user){
-        $userOrders = WashOrder::where('user_id',$user->id)->get();
-            return response()->json(['data' => $userOrders,'Status'=>200]);
+        $WashOrder = WashOrder::where('user_id',$user->id)->get();
+        $WinchOrder = WinchOrder::where('user_id',$user->id)->get();
+        $RepairOrder = RepairOrder::where('user_id',$user->id)->get();
+        $FuelOrder = FuelOrder::where('user_id',$user->id)->get();
+
+        $array = array_merge($WashOrder->toArray(), $WinchOrder->toArray(),$FuelOrder->toArray(),$RepairOrder->toArray());
+            return response()->json(['Order' =>collect($array)->sortBy('created_at')->values(),'Status'=>200]);
         }else{
             return response()
         ->json(['message' => ['data not found']], 404);

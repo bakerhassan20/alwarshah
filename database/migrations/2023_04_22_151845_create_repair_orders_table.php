@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('repair_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-      /*       $table->foreignId('service_id')->constrained()->onDelete('cascade'); */
+            $table->string('type')->default("repair");
             $table->string('car_type');
             $table->string('city');
             $table->decimal('lag',8,6);

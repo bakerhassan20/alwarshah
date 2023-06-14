@@ -44,10 +44,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/MakeRepairOrder',[OrderController::class,'MakeRepairOrder']);
 
       //Get All Orders
-      Route::get('/GetWinchOrder',[OrderController::class,'AllUserWinchOrder']);
+    /*   Route::get('/GetWinchOrder',[OrderController::class,'AllUserWinchOrder']);
       Route::get('/GetWashOrder',[OrderController::class,'AllUserWashOrder']);
-      Route::get('/GetFuelOrder',[OrderController::class,'AllUserFuelOrder']);
-      Route::get('/GetRepairOrder',[OrderController::class,'AllUserRepairOrder']);
+      Route::get('/GetFuelOrder',[OrderController::class,'AllUserFuelOrder']); */
+      Route::get('/GetUserOrder',[OrderController::class,'AllUserOrder']);
 
     //get all repair service
     Route::get('/RepairService', [OrderController::class,'RepairService']);

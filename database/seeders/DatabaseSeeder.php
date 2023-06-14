@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
         $this->call(ColoeThemeTableSeeder::class);
+        $this->call(SliderSeeder::class);
+        $this->call(RepairServiceSeeder::class);
+        $this->call(ProductsSeeder::class);
     }
 }
