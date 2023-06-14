@@ -18,7 +18,6 @@ class OrderController extends Controller
     public function MakeWinchOrder(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'service_id'=>'required',
             'car_type'=>'required',
             'lag_from'=>'required|between:-180,180',
             'lat_from'=>'required|between:-90,90',
@@ -26,7 +25,7 @@ class OrderController extends Controller
             'lat_to'=>'required|between:-90,90',
             'city_from'=>'required',
             'city_to'=>'required',
-            'payment'=>'required|integer|between:0,1',
+
         ]);
 
         if($validator->fails()){
@@ -35,8 +34,6 @@ class OrderController extends Controller
 
         $winchOrder = WinchOrder::create([
             'user_id'=>Auth::user()->id,
-            'service_id'=>$request->service_id,
-            'type'=>'winch',
             'car_type'=>$request->car_type,
             'city_from'=>$request->city_from,
             'city_to'=>$request->city_to,
@@ -44,7 +41,6 @@ class OrderController extends Controller
             'lat_from'=>$request->lat_from,
             'lag_to'=>$request->lag_to,
             'lat_to'=>$request->lat_to,
-            'payment'=>$request->payment,
             'status'=>0,
             'description'=>$request->description,
         ]);
@@ -57,11 +53,10 @@ class OrderController extends Controller
     public function MakeWashOrder(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'service_id'=>'required',
             'car_type'=>'required',
             'lag'=>'required|between:-180,180',
             'lat'=>'required|between:-90,90',
-            'payment'=>'required|integer|between:0,1',
+
         ]);
 
         if($validator->fails()){
@@ -70,13 +65,10 @@ class OrderController extends Controller
 
         $washOrder = WashOrder::create([
             'user_id'=>Auth::user()->id,
-            'service_id'=>$request->service_id,
-            'type'=>'clean',
             'car_type'=>$request->car_type,
             'city'=>$request->city,
             'lag'=>$request->lag,
             'lat'=>$request->lat,
-            'payment'=>$request->payment,
             'status'=>0,
             'description'=>$request->description,
         ]);
@@ -90,11 +82,9 @@ class OrderController extends Controller
     public function MakeFuelOrder(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'service_id'=>'required',
             'car_type'=>'required',
             'lag'=>'required|between:-180,180',
             'lat'=>'required|between:-90,90',
-            'payment'=>'required|integer|between:0,1',
             'electricity'=>'integer|between:0,1',
         ]);
 
@@ -104,8 +94,6 @@ class OrderController extends Controller
 
         $fuelOrder = FuelOrder::create([
             'user_id'=>Auth::user()->id,
-            'service_id'=>$request->service_id,
-            'type'=>'fuel',
             'car_type'=>$request->car_type,
             'city'=>$request->city,
             'lag'=>$request->lag,
@@ -114,7 +102,6 @@ class OrderController extends Controller
             'b92'=>$request->b92,
             'b95'=>$request->b95,
             'electricity'=>$request->electricity,
-            'payment'=>$request->payment,
             'status'=>0,
             'description'=>$request->description,
         ]);
@@ -127,11 +114,11 @@ class OrderController extends Controller
 
 
         $validator = Validator::make($request->all(),[
-            'service_id'=>'required',
+
             'car_type'=>'required',
             'lag'=>'required|between:-180,180',
             'lat'=>'required|between:-90,90',
-            'payment'=>'required|integer|between:0,1',
+
         ]);
 
         if($validator->fails()){
@@ -140,13 +127,10 @@ class OrderController extends Controller
 
         $repairOrder = RepairOrder::create([
             'user_id'=>Auth::user()->id,
-            'service_id'=>$request->service_id,
-            'type'=>'repair',
             'car_type'=>$request->car_type,
             'city'=>$request->city,
             'lag'=>$request->lag,
             'lat'=>$request->lat,
-            'payment'=>$request->payment,
             'status'=>0,
             'description'=>$request->description,
         ]);

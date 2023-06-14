@@ -13,20 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('winch_orders', function (Blueprint $table) {
+        Schema::create('fuel_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->string('type')->default("winch");
+          /*   $table->foreignId('service_id')->constrained()->onDelete('cascade'); */
             $table->string('car_type');
-            $table->string('city_from');
-            $table->string('city_to');
-            $table->decimal('lag_from',8,6);
-            $table->decimal('lat_from', 9,6);
-            $table->decimal('lag_to',8,6);
-            $table->decimal('lat_to', 9,6);
-            $table->integer('payment')->default(0);
+            $table->string('city');
+            $table->decimal('lag',8,6);
+            $table->decimal('lat', 9,6);
+            $table->decimal('b80',4,2)->nullable();
+            $table->decimal('b92',4,2)->nullable();
+            $table->decimal('b95',4,2)->nullable();
+            $table->integer('electricity')->default(0);
             $table->integer('status')->default(0);
+            $table->integer('driver_id')->nullable();
             $table->text('description')->nullable();
             $table->integer('isdelete')->default(0);
             $table->timestamps();
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('winch_orders');
+        Schema::dropIfExists('fuel_orders');
     }
 };

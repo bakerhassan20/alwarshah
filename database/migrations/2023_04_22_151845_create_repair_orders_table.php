@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('repair_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 999);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+      /*       $table->foreignId('service_id')->constrained()->onDelete('cascade'); */
+            $table->string('car_type');
+            $table->string('city');
+            $table->decimal('lag',8,6);
+            $table->decimal('lat', 9,6);
+            $table->integer('driver_id')->nullable();
+            $table->integer('status')->default(0);
             $table->text('description')->nullable();
-            $table->string('img')->default("default.jfif");
-            $table->decimal('latitude',8,6);
-            $table->decimal('longitude', 9,6);
-            $table->integer('active')->default(0);
+            $table->integer('isdelete')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('repair_orders');
     }
 };

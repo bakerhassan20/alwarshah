@@ -29,7 +29,6 @@
             </div>
             @guest
             <a href="{{ route('login') }}" class="btn btn-primary py-4 d-none d-lg-block">Sign IN</a>
-            <a href="{{ route('register') }}" class="btn btn-primary py-4 d-none d-lg-block" style="background-color:#FFF;color:red">Sign UP</a>
                   @else
                     <div class="nav-item dropdown"style="margin-right:120px;">
                         <a class="nav-link " data-bs-toggle="dropdown">

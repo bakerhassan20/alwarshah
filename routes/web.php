@@ -45,6 +45,16 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
 
         Route::resource('roles','App\Http\Controllers\RoleController');
         Route::resource('users','App\Http\Controllers\UserController');
+        Route::get('/admins','App\Http\Controllers\UserController@GetAdmins');
+        Route::get('/drivers','App\Http\Controllers\UserController@GetDrivers');
+        Route::get('/createDriver','App\Http\Controllers\UserController@createDriver');
+        Route::post('/storeDriver','App\Http\Controllers\UserController@storeDriver');
+
+
+        Route::get('/AllWinchOrder','App\Http\Controllers\Admin\OrderController@AllWinchOrder');
+        Route::get('/AllFuelOrder','App\Http\Controllers\Admin\OrderController@AllFuelOrder');
+        Route::get('/AllRepairOrder','App\Http\Controllers\Admin\OrderController@AllRepairOrder');
+        Route::get('/AllWashOrder','App\Http\Controllers\Admin\OrderController@AllWashOrder');
 
     Route::prefix('/profile')->name('profile.')->middleware('auth')->group(function () {
         Route::get('/',[ProfileController::class,'index'])->name('index');
@@ -61,34 +71,11 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
     All service_provider Routes List
     --------------------------------------------
     --------------------------------------------*/
-    Route::middleware(['auth', 'user-access:service_provider'])->group(function () {
 
-        Route::get('/complete', function(){
-            $company=Companies::where('user_id', Auth::user()->id)->first();
-            if($company){
-                return redirect()->route('service_provider.home');
-            }else{
-                $services = Service::where('active',1)->get();
-                return view('auth.complete',compact('services'));
-            }
-        });
-        Route::post('/storeinfo', [ServiceProviderController::class, 'storeInfo'])->name('storeinfo');
-    });
-    Route::middleware(['auth', 'user-access:service_provider','completeInfo'])->group(function () {
+    Route::middleware(['auth', 'user-access:service_provider'])->group(function () {
         Route::get('/home', [HomeController::class, 'service_provider'])->name('service_provider.home');
         Route::get('/profile', [ServiceProviderController::class, 'profile'])->name('profile');
 
-        Route::get('/complete', function(){
-            $company=Companies::where('user_id', Auth::user()->id)->first();
-            if($company){
-                return redirect()->route('service_provider.home');
-            }else{
-                $services = Service::where('active',1)->get();
-                return view('auth.complete',compact('services'));
-            }
-        });
-
-        Route::get('/getSubService/{id}', [ServiceProviderController::class, 'getSubService']);
 
         Route::get('/Orders', [OrderController::class, 'getOrders'])->name('getOrders');
 

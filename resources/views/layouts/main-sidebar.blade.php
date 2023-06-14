@@ -28,8 +28,6 @@
                     </svg><span class="side-menu__label">الرئيسية</span></a>
             </li>
 
-            @can('الاوردرات')
-
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -38,41 +36,22 @@
                             <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
                             <path
                                 d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                        </svg><span class="side-menu__label">الاوردرات</span><i class="angle fe fe-chevron-down"></i></a>
+                        </svg><span class="side-menu__label">الطلبات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
-                        @can('قائمة الاوردرات')
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/AllFuelOrder')) }}">البنزين</a></li>
 
-                            <li><a class="slide-item" href="#{{-- {{ url('/' . ($page = 'invoices')) }} --}}">قائمة الاوردرات</a></li>
-
-                        @endcan
-
-                        @can('الاوردرات المدفوعة')
-
-                        <li><a class="slide-item" href="#{{-- {{ url('/' . ($page = 'Invoice_Paid')) }} --}}">الاوردرات المدفوعة</a>
-
-                            @endcan
-
-                        </li>
-
-                        @can('الاوردرات الغير مدفوعة')
-                            <li><a class="slide-item" href="#{{-- {{ url('/' . ($page = 'Invoice_UnPaid')) }} --}}">الاوردرات
-                                    الغيرمدفوعة</a>
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/AllWashOrder')) }} "> تنظيف</a>
                             </li>
-                        @endcan
 
-                        @can('الاوردرات المدفوعة')
-                            <li><a class="slide-item" href="#{{-- {{ url('/' . ($page = 'Invoice_Partial')) }} --}}">الفواتير الاوردرات
-                                    جزئيا</a>
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/AllWinchOrder')) }}">ونش</a>
                             </li>
-                        @endcan
 
-                        @can('ارشيف الاوردرات')
-                            <li><a class="slide-item" href="#{{-- {{ url('/' . ($page = 'Archive')) }} --}}">ارشيف الاوردرات</a></li>
-                        @endcan
+                            <li><a class="slide-item" href=" {{ url('/' . ($page = 'admin/AllRepairOrder')) }} ">تصليح</a>
+                            </li>
+
                     </ul>
                 </li>
-            @endcan
 
             @can('التقارير')
 
@@ -98,7 +77,7 @@
                 </li>
             @endcan
 
-            @can('المستخدمين')
+
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -109,16 +88,19 @@
                                 d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
                         </svg><span class="side-menu__label">المستخدمين</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        @can('قائمة المستخدمين')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">قائمة المستخدمين</a></li>
-                        @endcan
-                            <li><a class="slide-item" href="{{ route('companys.index') }}"> الشركات</a></li>
-                        @can('صلاحيات المستخدمين')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">صلاحيات المستخدمين</a></li>
-                        @endcan
+
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/admins')) }}">المسؤولين</a></li>
+
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/drivers')) }}">السائقين</a></li>
+
+
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/users')) }}"> العملاء</a></li>
+
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/roles')) }}">صلاحيات المسؤولين</a></li>
+
                     </ul>
                 </li>
-            @endcan
+
 
             @can('الاعدادات')
 

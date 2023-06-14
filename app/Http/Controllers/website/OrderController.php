@@ -25,6 +25,10 @@ class OrderController extends Controller
 
       }
 
+
+      ////////////////////////////////////
+
+
       public function getWinchOrders($id){
 
         $winch = WinchOrder::find($id);
@@ -56,87 +60,117 @@ class OrderController extends Controller
       }
 
 
+      /////////////////////////////////////////////////
+
       public function addWinchOffer(Request $request){
 
-        $validator = Validator::make($request->all(),[
-            'price'=>'required',
-        ]);
-
-        $company=Companies::where('user_id', Auth::user()->id)->first();
-
-        WinchOffer::create([
-            'order_id'=>$request->id,
-            'user_id'=>Auth::user()->id,
-            'company_id'=>$company->id,
-            'company_name'=>$company->name,
-            'price'=>$request->price,
-            'notes'=>$request->notes,
-        ]);
-
-        return redirect()->back();
+        $order= WinchOrder::find($request->id);
+        $order->status= $order->status + 1;
+        $order->driver_id=Auth::user()->id;
+        $order->save();
+        return redirect()->route('getOrders');
       }
 
       public function addFuelOffer(Request $request){
 
-        $validator = Validator::make($request->all(),[
-            'price'=>'required',
-        ]);
-
-        $company=Companies::where('user_id', Auth::user()->id)->first();
-
-        FuelOffer::create([
-            'order_id'=>$request->id,
-            'user_id'=>Auth::user()->id,
-            'company_id'=>$company->id,
-            'company_name'=>$company->name,
-            'price'=>$request->price,
-            'notes'=>$request->notes,
-        ]);
-
-        return redirect()->back();
+        $order= FuelOrder::find($request->id);
+        $order->status= $order->status + 1;
+        $order->driver_id=Auth::user()->id;
+        $order->save();
+        return redirect()->route('getOrders');
       }
 
       public function addRepairOffer(Request $request){
-
-        $validator = Validator::make($request->all(),[
-            'price'=>'required',
-        ]);
-
-        $company=Companies::where('user_id', Auth::user()->id)->first();
-
-        RepairOffer::create([
-            'order_id'=>$request->id,
-            'user_id'=>Auth::user()->id,
-            'company_id'=>$company->id,
-            'company_name'=>$company->name,
-            'price'=>$request->price,
-            'notes'=>$request->notes,
-        ]);
-
-        return redirect()->back();
+        $order= RepairOrder::find($request->id);
+        $order->status= $order->status + 1;
+        $order->driver_id=Auth::user()->id;
+        $order->save();
+        return redirect()->route('getOrders');
       }
 
       public function addWashOffer(Request $request){
 
-        $validator = Validator::make($request->all(),[
-            'price'=>'required',
-        ]);
+        $order= WashOrder::find($request->id);
+        $order->status= $order->status + 1;
+        $order->driver_id=Auth::user()->id;
+        $order->save();
 
-        $company=Companies::where('user_id', Auth::user()->id)->first();
 
-        WashOffer::create([
-            'order_id'=>$request->id,
-            'user_id'=>Auth::user()->id,
-            'company_id'=>$company->id,
-            'company_name'=>$company->name,
-            'price'=>$request->price,
-            'notes'=>$request->notes,
-        ]);
+        $data=[];
+        $data['message']= "Some message";
 
-        return redirect()->back();
+        $data['booking_id']="my booking booking_id";
+
+        $tokens = [];
+        $tokens[] = '2Xu8IRfrTgeqYDmJ2GMAweqjy5L2';
+        $response = $this->sendFirebasePush($tokens,$data);
+
+
+
+        return redirect()->route('getOrders');
       }
 
 
+      public function sendFirebasePush($tokens, $data)
+	    {
+
+	$serverKey='AAAAmqKZJQk:APA91bEm4Ypjakp5uTdVUvHi4NqCxMGRzSvs09IXysNcWhacEyQxkEJF2KnMgH-anPLh56nHB8jtWezzqDdP2TraLTgRM_wN6VgL8IL8vorjRaUeiEumkOjPVjjaIYrKxX-8wiujLoKT';
+
+	        // prep the bundle
+	        $msg = array
+	        (
+	            'message'   => $data['message'],
+	            'booking_id' => $data['booking_id'],
+	        );
+
+	        $notifyData = [
+                 "body" => $data['message'],
+                 "title"=> "Port App"
+            ];
+
+	        $registrationIds = $tokens;
+
+	        if(count($tokens) > 1){
+                $fields = array
+                (
+                    'registration_ids' => $registrationIds, //  for  multiple users
+                    'notification'  => $notifyData,
+                    'data'=> $msg,
+                    'priority'=> 'high'
+                );
+            }
+            else{
+
+                $fields = array
+                (
+                    'to' => $registrationIds[0], //  for  only one users
+                    'notification'  => $notifyData,
+                    'data'=> $msg,
+                    'priority'=> 'high'
+                );
+            }
+
+	        $headers[] = 'Content-Type: application/json';
+	        $headers[] = 'Authorization: key='. $serverKey;
+
+	        $ch = curl_init();
+	        curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+	        curl_setopt( $ch,CURLOPT_POST, true );
+	        curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+	        curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+	        // curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+	        curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+	        $result = curl_exec($ch );
+	        if ($result === FALSE)
+	        {
+	            die('FCM Send Error: ' . curl_error($ch));
+	        }
+
+	        curl_close( $ch );
+	        return $result;
+	    }
+
+      ////////////////////////////////////////////
 
 }
 

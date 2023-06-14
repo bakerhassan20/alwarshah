@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-اضافة مستخدم 
+اضافة سائق
 @stop
 
 
@@ -14,7 +14,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ اضافة
-                مستخدم</span>
+                سائق</span>
         </div>
     </div>
 </div>
@@ -49,14 +49,14 @@
                     </div>
                 </div><br>
                 <form class="parsley-style-1" id="selectForm2" autocomplete="off" name="selectForm2"
-                    action="{{route('users.store','test')}}" method="post">
+                    action="/admin/storeDriver" method="post">
                     {{csrf_field()}}
 
                     <div class="">
 
                         <div class="row mg-b-20">
                             <div class="parsley-input col-md-6" id="fnWrapper">
-                                <label>اسم المستخدم: <span class="tx-danger">*</span></label>
+                                <label>اسم السائق: <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
                                     data-parsley-class-handler="#lnWrapper" name="name" required="" type="text"autocomplete="off">
                             </div>
@@ -86,7 +86,7 @@
 
                     <div class="row row-sm mg-b-20">
                         <div class="col-lg-6">
-                            <label class="form-label">حالة المستخدم</label>
+                            <label class="form-label">حالة السائق</label>
                             <select name="Status" id="select-beast" class="form-control  nice-select  custom-select">
                                 <option value="مفعل">مفعل</option>
                                 <option value="غير مفعل">غير مفعل</option>
@@ -97,8 +97,14 @@
                     <div class="row mg-b-20">
                         <div class="col-xs-12 col-md-12">
                             <div class="form-group">
-                                <label class="form-label"> صلاحية المستخدم</label>
-                                {!! Form::select('roles_name[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                                <label class="form-label">نوع السائق</label>
+                                <select required  name="driver_type" id="select-beast" class="form-control  ">
+                                <option value=""display>اختر نوع السائق</option>
+                                <option value="fuel">بنزين</option>
+                                <option value="repair">اصلاح</option>
+                                <option value="wash">تنظيف</option>
+                                <option value="winsh">ونش</option>
+                            </select>
                             </div>
                         </div>
                     </div>

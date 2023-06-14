@@ -28,6 +28,8 @@ class User extends Authenticatable
         'avatar',
         'bio',
         'type',
+        'driver_type',
+        'device_token' // attriiteattribute added
     ];
 
     /**
@@ -49,7 +51,7 @@ class User extends Authenticatable
         'roles_name' => 'array',
     ];
 
-    
+
     /**
      * Interact with the user's first name.
      *

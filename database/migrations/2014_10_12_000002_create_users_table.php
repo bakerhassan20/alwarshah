@@ -24,6 +24,8 @@ return new class extends Migration
             $table->json('roles_name')->default(new Expression('(JSON_ARRAY("user"))'));
             $table->string('Status', 10)->default("مفعل");
             $table->string('type')->default('service_provider');
+            $table->string('driver_type')->nullable();
+            $table->text('device_token')->nullable(); // Add device token in users migration file.
             $table->rememberToken();
             $table->timestamps();
         });

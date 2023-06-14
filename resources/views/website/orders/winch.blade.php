@@ -38,8 +38,7 @@
          <h4>Car Type : <span style="color:#999;font-size: 18px !important;">{{ $winch->car_type }}</span></<h4>
         </div>
           <div class="coin-base">
-          <span class="money"> <i class="fa-solid fa-money-bill-wave"></i></span>
-          <span style="color:#999;font-size: 18px !important;">@if($winch->payment == 0) Credit  @else Cash  @endif</span>
+
           </div>
           <div class="time-left">
            <span class="time"> <i class="fa-solid fa-clock"></i></span>
@@ -53,7 +52,11 @@
         <span class="headicone"><img src="{{ URL::asset('assets/img/icon/38824.jpg') }}"></span>
       </div>
 
-      <a  style="margin-left: 380px;" class="modal-effect btn btn-danger" class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8" data-bs-toggle="modal" data-bs-target="#modaldemo8">Add Offer</a>
+     @if($winch->status == 0)
+     <a  style="margin-left: 380px;" class="modal-effect btn btn-danger" class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8" data-bs-toggle="modal" data-bs-target="#modaldemo8">Accept Order</a>
+     @elseif ($winch->status == 1)
+      <a  style="margin-left: 380px;" class="modal-effect btn btn-danger" class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8" data-bs-toggle="modal" data-bs-target="#modaldemo8">Delivery Order</a>
+     @endif
     </div>
 </div>
 
@@ -63,26 +66,31 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add offer</h5>
+       @if($winch->status == 0)
+     <h5 class="modal-title" id="exampleModalLabel">Accept Order</h5>
+    @elseif ($winch->status == 1)
+      <h5 class="modal-title" id="exampleModalLabel">Delivery Order</h5>
+    @endif
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     <form action="/Orders/Winch/Offer" method="post">
         <div class="modal-body">
                 {{csrf_field()}}
                 <input type="hidden" class="form-control" id="id" name="id" value="{{  $winch->id }}">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">price</label>
-                        <input type="number" class="form-control" id="price" name="price">
-                     </div>
+                  @if($winch->status == 0)
+                <h4>Do you want to accept this Order ?</h4>
+                @elseif ($winch->status == 1)
+               <h4>Do you want to finsh this Order ?</h4>
+                @endif
 
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">notes</label>
-                        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
-                    </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">@if($winch->status == 0)
+                Accept
+                @elseif ($winch->status == 1)
+               Finsh
+                @endif</button>
         </div>
     </form>
     </div>

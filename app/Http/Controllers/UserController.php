@@ -22,6 +22,23 @@ return view('users.show_users',compact('data'))
 }
 
 
+public function GetAdmins(Request $request){
+
+    $data = User::where('type','admin')->orderBy('id','DESC')->paginate(5);
+    return view('users.show_admins',compact('data'))
+    ->with('i', ($request->input('page', 1) - 1) * 5);
+
+}
+
+public function GetDrivers(Request $request){
+
+    $data = User::where('type','service_provider')->orderBy('id','DESC')->paginate(5);
+    return view('users.show_drivers',compact('data'))
+    ->with('i', ($request->input('page', 1) - 1) * 5);
+
+}
+
+
 /**
 * Show the form for creating a new resource.
 *
@@ -33,6 +50,31 @@ $roles = Role::pluck('name','name')->all();
 
 return view('users.Add_user',compact('roles'));
 
+}
+
+public function createDriver()
+{
+
+return view('users.Add_driver');
+
+}
+
+public function storeDriver(Request $request){
+    $this->validate($request, [
+        'name' => 'required',
+        'phone' => 'required|unique:users,phone',
+        'password' => 'required|same:confirm-password',
+        'driver_type' => 'required'
+        ]);
+
+        $input = $request->all();
+
+
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+        return redirect('/admin/drivers')
+        ->with('success','تم اضافة المستخدم بنجاح');
 }
 /**
 * Store a newly created resource in storage.
