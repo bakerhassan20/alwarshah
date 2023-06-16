@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Website\OrderController;
 use App\Http\Controllers\website\WebsiteController;
+use App\Http\Controllers\Admin\subscriptionsController;
 use App\Http\Controllers\website\ServiceProviderController;
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,11 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
         Route::get('/AllRepairOrder','App\Http\Controllers\Admin\OrderController@AllRepairOrder');
         Route::get('/AllWashOrder','App\Http\Controllers\Admin\OrderController@AllWashOrder');
 
+        Route::get('/getSlider','App\Http\Controllers\Admin\PublicController@getSlider');
+        Route::post('/addSlide','App\Http\Controllers\Admin\PublicController@addSlide');
+        Route::post('/updateSlider','App\Http\Controllers\Admin\PublicController@updateSlider');
+        Route::post('/deleteSlide','App\Http\Controllers\Admin\PublicController@deleteSlide');
+
     Route::prefix('/profile')->name('profile.')->middleware('auth')->group(function () {
         Route::get('/',[ProfileController::class,'index'])->name('index');
         Route::get('/edit',[ProfileController::class,'edit'])->name('edit');
@@ -63,6 +69,8 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
         Route::put('/update-password',[ProfileController::class,'update_password'])->name('update-password');
         Route::put('/update-phone',[ProfileController::class,'update_phone'])->name('update-phone');
     });
+
+    Route::get('/plans', [subscriptionsController::class, 'index']);
 
     });
 
