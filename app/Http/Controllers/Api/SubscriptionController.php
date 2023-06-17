@@ -44,9 +44,14 @@ class SubscriptionController extends Controller
         $user = User::find(Auth::user()->id);
 
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->where('ends_at','>', carbon::now())->first();
+        if($bookingsOfSubscriber){
+            $user->planSubscription($bookingsOfSubscriber->slug)->cancel(true);
 
-        $user->planSubscription($bookingsOfSubscriber->slug)->cancel(true);
-        return response()->json(['message' => ['Canceled Subscribed Successfully'],'data'=>$bookingsOfSubscriber],200);
+            return response()->json(['message' => ['Canceled Subscribed Successfully'],'data'=>$bookingsOfSubscriber],200);
+        }else{
+            return response()->json(['message' => ['The user is not subscribed']],405);
+        }
+
 
     }
     public function CheckSubscription(){
@@ -70,10 +75,15 @@ class SubscriptionController extends Controller
         $user = User::find(Auth::user()->id);
 
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->first();
+        if( $bookingsOfSubscriber){
+            $user->planSubscription($bookingsOfSubscriber->slug)->renew();
+            return response()->json(['message' =>'Subscription renewed successfully'],200);
+        }else{
+            return response()->json(['message' =>'The user is not subscribed'],405);
+        }
 
-        $user->planSubscription($bookingsOfSubscriber->slug)->renew();
 
-        return response()->json(['message' =>'Subscription renewed successfully'],200);
+
 
     }
 
@@ -83,7 +93,13 @@ class SubscriptionController extends Controller
 
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->first();
 
-        return response()->json(['ends_at' => $bookingsOfSubscriber->ends_at],200);
+        if($bookingsOfSubscriber){
+            return response()->json(['ends_at' => $bookingsOfSubscriber->ends_at],200);
+
+        }else{
+            return response()->json(['message' =>'The user is not subscribed'],405);
+        }
+
 
     }
 
