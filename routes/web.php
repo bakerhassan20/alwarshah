@@ -34,7 +34,32 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
     All Admin Routes List
     --------------------------------------------
     --------------------------------------------*/
+
+Route::get('maptrak/{map}',function (){
+
+    return view('website.mapTracking');
+})->name('map-tracking');
+
+
+Route::get('tracking/',function (){
+
+    $data=[
+
+        [27.154325,31.209059],
+        [27.146841,31.215414],
+        [27.145389,31.234396],
+        [27.145389,31.272851],
+        [27.111219,31.300211],
+        [27.075458,31.308803],
+        [27.040603,31.315330]
+
+    ];
+    return response()->json($data);
+})->name('tracking');
     Route::prefix('/admin')->middleware(['auth', 'user-access:admin'])->group(function () {
+
+
+
 
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
@@ -61,6 +86,11 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
         Route::post('/addSlide','App\Http\Controllers\Admin\PublicController@addSlide');
         Route::post('/updateSlider','App\Http\Controllers\Admin\PublicController@updateSlider');
         Route::post('/deleteSlide','App\Http\Controllers\Admin\PublicController@deleteSlide');
+
+        Route::get('/getProducts','App\Http\Controllers\Admin\PublicController@getProducts');
+        Route::post('/addProduct','App\Http\Controllers\Admin\PublicController@addProduct');
+        Route::post('/updateProduct','App\Http\Controllers\Admin\PublicController@updateProduct');
+        Route::post('/deleteProduct','App\Http\Controllers\Admin\PublicController@deleteProduct');
 
     Route::prefix('/profile')->name('profile.')->middleware('auth')->group(function () {
         Route::get('/',[ProfileController::class,'index'])->name('index');

@@ -134,6 +134,7 @@
 
                             <li><a class="slide-item" href="{{ route('services.index') }}">الاقسام</a></li>
                             <li><a class="slide-item" href="/admin/getSlider">السليدات</a></li>
+                        <li><a class="slide-item" href="/admin/getProducts">المنتجات</a></li>
 
                     </ul>
                 </li>

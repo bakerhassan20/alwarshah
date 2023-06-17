@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->where('ends_at','>', carbon::now())->first();
 
         if($bookingsOfSubscriber){
-            return response()->json(['message' => 'The user is subscribed','data'=>$bookingsOfSubscriber],200);
+            return response()->json(['message' => ['The user is subscribed'],'data'=>$bookingsOfSubscriber],200);
         }
         if($request->plane_id ==1){
             $plan = app('rinvex.subscriptions.plan')->find($request->plane_id);
@@ -35,7 +35,7 @@ class SubscriptionController extends Controller
             $user->newPlanSubscription('pro', $plan);
         }
 
-        return response()->json(['message' => 'User Subscribed Successfully'],200);
+        return response()->json(['message' =>['User Subscribed Successfully']],200);
     }
 
 
@@ -46,7 +46,7 @@ class SubscriptionController extends Controller
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->where('ends_at','>', carbon::now())->first();
 
         $user->planSubscription($bookingsOfSubscriber->slug)->cancel(true);
-        return response()->json(['message' => 'Canceled Subscribed Successfully','data'=>$bookingsOfSubscriber],200);
+        return response()->json(['message' => ['Canceled Subscribed Successfully'],'data'=>$bookingsOfSubscriber],200);
 
     }
     public function CheckSubscription(){
@@ -54,9 +54,9 @@ class SubscriptionController extends Controller
         $user = User::find(Auth::user()->id);
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->where('canceled_at','=',null)->where('ends_at','>', carbon::now())->first();
         if($bookingsOfSubscriber){
-            return response()->json(['message' => 'The user is subscribed','data'=>$bookingsOfSubscriber],200);
+            return response()->json(['message' => ['The user is subscribed'],'data'=>$bookingsOfSubscriber],200);
         }else{
-            return response()->json(['message' => 'The user is not subscribed'],405);
+            return response()->json(['message' => ['The user is not subscribed']],405);
 
         }
 

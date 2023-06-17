@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\RepairService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -47,7 +48,7 @@ class OrderController extends Controller
             'description'=>$request->description,
         ]);
 
-        return response()->json(['message' => 'Order sent successfully', 'order'=>$winchOrder], 200);
+        return response()->json(['message' => ['Order sent successfully'], 'order'=>$winchOrder], 200);
 
     }
 
@@ -76,7 +77,11 @@ class OrderController extends Controller
             'description'=>$request->description,
         ]);
 
-        return response()->json(['message' => 'Order sent successfully', 'order'=>$washOrder], 200);
+        $url = URL::temporarySignedRoute('map-tracking',now()->addSecond(30),[
+            'map' =>$washOrder->id
+        ]);
+
+        return response()->json(['message' => ['Order sent successfully'], 'order'=>$washOrder,'tracking'=>$url], 200);
 
 
     }
@@ -110,7 +115,7 @@ class OrderController extends Controller
             'description'=>$request->description,
         ]);
 
-        return response()->json(['message' => 'Order sent successfully', 'order'=>$fuelOrder], 200);
+        return response()->json(['message' => ['Order sent successfully'], 'order'=>$fuelOrder], 200);
 
     }
 
@@ -153,7 +158,7 @@ class OrderController extends Controller
         }
 
         $Service = UserRepair::leftJoin('repair_services', 'repair_services.id','=','user_repairs.repair_service_id')->select(['repair_services.name'])->where('user_repairs.repair_order_id',$repairOrder->id)->get();
-        return response()->json(['message' => 'Order sent successfully', 'order'=>$repairOrder,'services'=>$Service], 200);
+        return response()->json(['message' => ['Order sent successfully'], 'order'=>$repairOrder,'services'=>$Service], 200);
 
 
     }
@@ -162,42 +167,7 @@ class OrderController extends Controller
         $repairService = RepairService::all();
         return response()->json(['repairService'=>$repairService], 200);
     }
-/*
-    public function AllUserWinchOrder(){
-        $user = auth('sanctum')->user();
-       if($user){
 
-        $userOrders = WinchOrder::where('user_id',$user->id)->get();
-            return response()->json(['data' => $userOrders,'Status'=>200]);
-        }else{
-            return response()
-        ->json(['message' => ['data not found']], 404);
-        }
-    }
-
-    public function AllUserFuelOrder(){
-        $user = auth('sanctum')->user();
-       if($user){
-        $userOrders = FuelOrder::where('user_id',$user->id)->get();
-            return response()->json(['data' => $userOrders,'Status'=>200]);
-        }else{
-            return response()
-        ->json(['message' => ['data not found']], 404);
-        }
-    }
-
-
-
-    public function AllUserRepairOrder(){
-        $user = auth('sanctum')->user();
-       if($user){
-        $userOrders = RepairOrder::where('user_id',$user->id)->get();
-            return response()->json(['data' => $userOrders,'Status'=>200]);
-        }else{
-            return response()
-        ->json(['message' => ['data not found']], 404);
-        }
-    } */
 
     public function AllUserOrder(){
         $user = auth('sanctum')->user();

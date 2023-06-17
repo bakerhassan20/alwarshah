@@ -30,8 +30,8 @@ class ProductsSeeder extends Seeder
                 'name' => 'product2',
                 'price' => 100,
                 'quantity' => 10,
-                'description' => 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRz3Re0XGwm7mJNL_2JI4FYHQNsrj369cP6IKxvr92EjHKse2q9wtGKSPFPLZRMdfU2cGOqoP1hQw&usqp=CAc',
-                'img' => 'product2.jpg',
+                'description' => 'product2',
+                'img' => 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRz3Re0XGwm7mJNL_2JI4FYHQNsrj369cP6IKxvr92EjHKse2q9wtGKSPFPLZRMdfU2cGOqoP1hQw&usqp=CAc',
                 'active' => 1,
                 ]);
 
