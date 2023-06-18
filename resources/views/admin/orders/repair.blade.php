@@ -43,10 +43,12 @@
                                         <tr>
                                             <th class="border-bottom-0">#</th>
                                             <th class="border-bottom-0">اسم المستخدم</th>
+                                            <th class="border-bottom-0"> الهاتف</th>
                                             <th class="border-bottom-0">نوع السياره</th>
                                             <th class="border-bottom-0">العنوان</th>
                                             <th class="border-bottom-0">الحاله</th>
                                             <th class="border-bottom-0">السائق</th>
+                                            <th class="border-bottom-0">تتبع</th>
                                             <th class="border-bottom-0">تفاصيل</th>
 
                                         </tr>
@@ -58,6 +60,7 @@
                                         <tr>
                                             <td>{{$i}}</td>
                                             <td>{{App\Models\User::find($x->user_id)->name}}</td>
+                                            <td>{{App\Models\User::find($x->user_id)->phone}}</td>
                                             <td>{{$x->car_type}}</td>
                                             <td>{{$x->city}}</td>
 
@@ -82,6 +85,15 @@
                                                 <div class="dot-label bg-danger ml-1"></div>In Process
                                             </span></td>
                                             @endif
+
+                                            @if($x->driver_id)
+                                                <td><a class="btn btn-sm btn-danger"><i class="las la-map-marker-alt la-lg"></i></a></td>
+                                            @else
+                                                <td><span class="label text-danger d-flex">
+                                                <div class="dot-label bg-danger ml-1"></div>In Process
+                                            </span></td>
+                                            @endif
+
 
                                             <td><a class="btn btn-sm btn-info"><i class="las la-eye"></i></a></td>
                                         </tr>

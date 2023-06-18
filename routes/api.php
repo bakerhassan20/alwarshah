@@ -60,6 +60,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/renewSubscription',[SubscriptionController::class,'RenewSubscription']);
     Route::get('/userSubscription',[SubscriptionController::class,'UserSubscription']);
     Route::get('/allUserSubscription',[SubscriptionController::class,'AllUserSubscription']);
+
+
 });
 
 
@@ -70,6 +72,7 @@ Route::middleware(['auth:sanctum','check-Subscription'])->group(function () {
     Route::post('/MakeWashOrder',[OrderController::class,'MakeWashOrder']);
     Route::post('/MakeFuelOrder',[OrderController::class,'MakeFuelOrder']);
     Route::post('/MakeRepairOrder',[OrderController::class,'MakeRepairOrder']);
-});
 
+
+});
 

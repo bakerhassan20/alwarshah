@@ -81,6 +81,8 @@ class OrderController extends Controller
             'map' =>$washOrder->id
         ]);
 
+        return response()->json(['message' => ['Order sent successfully'], 'order'=>$washOrder], 200);
+
         return response()->json(['message' => ['Order sent successfully'], 'order'=>$washOrder,'tracking'=>$url], 200);
 
 

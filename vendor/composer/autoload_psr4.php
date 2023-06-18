@@ -40,6 +40,8 @@ return array(
     'Symfony\\Component\\ErrorHandler\\' => array($vendorDir . '/symfony/error-handler'),
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
+    'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'Srmklive\\PayPal\\' => array($vendorDir . '/srmklive/paypal/src'),
     'Spatie\\Translatable\\' => array($vendorDir . '/spatie/laravel-translatable/src'),
     'Spatie\\Sluggable\\' => array($vendorDir . '/spatie/laravel-sluggable/src'),
     'Spatie\\SchemalessAttributes\\' => array($vendorDir . '/spatie/laravel-schemaless-attributes/src'),

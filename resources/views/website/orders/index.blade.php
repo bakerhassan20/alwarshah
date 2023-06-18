@@ -29,9 +29,9 @@
 @section('content')
 
 <?php
-if(Auth::user()->driver_type == 'winch'){
+if(Auth::user()->driver_type == 'winsh'){
 
-    $type='winch';
+    $type='winsh';
 }
 if(Auth::user()->driver_type == 'fuel'){
 
@@ -74,15 +74,17 @@ if(Auth::user()->driver_type == 'wash'){
                              <li><a href="#tab3danger" data-toggle="tab">Done Orders</a></li>
 
 
-                             <li><a href="#tab6danger" data-toggle="tab">Wash</a></li>
+{{--                             <li><a href="#tab6danger" data-toggle="tab">Wash</a></li>--}}
 
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#tab4danger" data-toggle="tab">Danger 4</a></li>
-                                    <li><a href="#tab5danger" data-toggle="tab">Danger 5</a></li>
-                                </ul>
-                            </li>
+{{--                            <li class="dropdown">--}}
+{{--                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>--}}
+{{--                                <ul class="dropdown-menu" role="menu">--}}
+{{--                                    <li><a href="#tab4danger" data-toggle="tab">Danger 4</a></li>--}}
+{{--                                    <li><a href="#tab5danger" data-toggle="tab">Danger 5</a></li>--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
+
+
                         </ul>
                 </div>
                 <div class="panel-body">
@@ -93,7 +95,7 @@ if(Auth::user()->driver_type == 'wash'){
 
      {{-- /////////////////////// --}}
 
-    @if ($type == 'winch')
+    @if ($type == 'winsh')
     <?php $winchOrders = \App\Models\WinchOrder::where('status',0)->where('isdelete',0)->orderBy('id','desc')->get(); ?>
 
         <div class="container" style="margin-top:40px;margin-bottom: 60px;">
@@ -304,7 +306,7 @@ if(Auth::user()->driver_type == 'wash'){
 
        {{-- /////////////////////// --}}
 
-    @if ($type == 'winch')
+    @if ($type == 'winsh')
     <?php $winchOrders = \App\Models\WinchOrder::where('status',1)->where('driver_id',Auth::user()->id)->where('isdelete',0)->orderBy('id','desc')->get(); ?>
 
         <div class="container" style="margin-top:40px;margin-bottom: 60px;">
@@ -517,7 +519,7 @@ if(Auth::user()->driver_type == 'wash'){
 
        {{-- /////////////////////// --}}
 
-    @if ($type == 'winch')
+    @if ($type == 'winsh')
     <?php $winchOrders = \App\Models\WinchOrder::where('status',2)->where('driver_id',Auth::user()->id)->where('isdelete',0)->orderBy('id','desc')->get(); ?>
 
         <div class="container" style="margin-top:40px;margin-bottom: 60px;">

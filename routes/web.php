@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Models\Service;
 use App\Http\Controllers;
 use App\Models\Companies;
@@ -35,6 +36,8 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home')->middleware('
     --------------------------------------------
     --------------------------------------------*/
 
+
+
 Route::get('maptrak/{map}',function (){
 
     return view('website.mapTracking');
@@ -56,8 +59,17 @@ Route::get('tracking/',function (){
     ];
     return response()->json($data);
 })->name('tracking');
+
+
+
+
+
     Route::prefix('/admin')->middleware(['auth', 'user-access:admin'])->group(function () {
 
+
+        Route::get('adminTraking',function (){
+            return view('admin.mapTracking');
+        })->name('adminTraking');
 
 
 
@@ -134,7 +146,14 @@ Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_
 
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
 
-
+Route::controller(PaymentController::class)
+    ->prefix('paypal')
+    ->group(function () {
+        Route::view('payment', 'paypal.index')->name('create.payment');
+        Route::post('handle-payment', 'handlePayment')->name('make.payment');
+        Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
+        Route::get('payment-success/{plane}', 'paymentSuccess')->name('success.payment');
+    });
 
 
 
