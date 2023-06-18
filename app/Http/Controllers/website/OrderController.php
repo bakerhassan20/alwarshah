@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Models\Companies;
 use App\Models\FuelOffer;
 use App\Models\FuelOrder;
+use App\Models\User;
 use App\Models\WashOffer;
 use App\Models\WashOrder;
 use App\Models\UserRepair;
@@ -68,6 +69,20 @@ class OrderController extends Controller
         $order->status= $order->status + 1;
         $order->driver_id=Auth::user()->id;
         $order->save();
+
+          if ($order->status == 1){
+              $data=[];
+              $data['message']= "Your order has been received from a driver";
+              $data['booking_id']="The driver is coming on the roads";
+          }elseif($order->status == 2){
+              $data=[];
+              $data['message']= "Your order has been completed";
+              $data['booking_id'] = "Please rate the service";
+          }
+
+          $tokens = [];
+          $tokens[] = User::find($order->user_id)->device_token;
+          $response = $this->sendFirebasePush($tokens,$data);
         return redirect()->route('getOrders');
       }
 
@@ -77,6 +92,20 @@ class OrderController extends Controller
         $order->status= $order->status + 1;
         $order->driver_id=Auth::user()->id;
         $order->save();
+
+          if ($order->status == 1){
+              $data=[];
+              $data['message']= "Your order has been received from a driver";
+              $data['booking_id']="The driver is coming on the roads";
+          }elseif($order->status == 2){
+              $data=[];
+              $data['message']= "Your order has been completed";
+              $data['booking_id'] = "Please rate the service";
+          }
+
+          $tokens = [];
+          $tokens[] = User::find($order->user_id)->device_token;
+          $response = $this->sendFirebasePush($tokens,$data);
         return redirect()->route('getOrders');
       }
 
@@ -85,6 +114,20 @@ class OrderController extends Controller
         $order->status= $order->status + 1;
         $order->driver_id=Auth::user()->id;
         $order->save();
+
+          if ($order->status == 1){
+              $data=[];
+              $data['message']= "Your order has been received from a driver";
+              $data['booking_id']="The driver is coming on the roads";
+          }elseif($order->status == 2){
+              $data=[];
+              $data['message']= "Your order has been completed";
+              $data['booking_id'] = "Please rate the service";
+          }
+
+          $tokens = [];
+          $tokens[] = User::find($order->user_id)->device_token;
+          $response = $this->sendFirebasePush($tokens,$data);
         return redirect()->route('getOrders');
       }
 
@@ -96,16 +139,19 @@ class OrderController extends Controller
         $order->save();
 
 
-
-        $data=[];
-        $data['message']= "Some message";
-
-        $data['booking_id']="my booking booking_id";
+        if ($order->status == 1){
+            $data=[];
+            $data['message']= "Your order has been received from a driver";
+            $data['booking_id']="The driver is coming on the roads";
+        }elseif($order->status == 2){
+            $data=[];
+            $data['message']= "Your order has been completed";
+            $data['booking_id'] = "Please rate the service";
+        }
 
         $tokens = [];
-        $tokens[] = '2Xu8IRfrTgeqYDmJ2GMAweqjy5L2';
+          $tokens[] = User::find($order->user_id)->device_token;
         $response = $this->sendFirebasePush($tokens,$data);
-
 
 
         return redirect()->route('getOrders');
@@ -125,8 +171,9 @@ class OrderController extends Controller
 	        );
 
 	        $notifyData = [
-                 "body" => $data['message'],
-                 "title"=> "Port App"
+
+                 "title"=> $data['message'],
+                 "body" => $data['booking_id'],
             ];
 
 	        $registrationIds = $tokens;

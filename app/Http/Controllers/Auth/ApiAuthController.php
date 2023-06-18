@@ -24,6 +24,7 @@ class ApiAuthController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'device_token'=>'required',
         ]);
 
         if($validator->fails()){
@@ -33,19 +34,21 @@ class ApiAuthController extends Controller
 
         $user = User::where('phone',$request->phone)->first();
         if($user){
-          /*   if ($user->type == 'customer'){ */
+                $user->device_token = $request->device_token;
+                $user->save();
                 $token = $user->createToken('auth_token')->plainTextToken;
                 return response()
                     ->json(['user_data' => $user,'access_token' => $token, 'token_type' => 'Bearer', 'Status'=>200]);
-      /*       }else{ */
+
                 return response()
                 ->json(['message' => ['Unauthorized']], 401);
-        /*     } */
+
 
         }else{
             $user = User::create([
                 'name' => 'customer',
                 'phone' => $request->phone,
+                'device_token' => $request->device_token,
                 'type'=>"customer",
                 'password'=>"12345678",
              ]);

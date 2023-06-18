@@ -66,8 +66,8 @@
       </main>
       <div class="card-attribute">
         <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar"/>
-          <p>Order By  <span>{{ \App\Models\User::find($winch->user_id)->name }}</span></p>
-          <p>Phone  <span>{{ \App\Models\User::find($winch->user_id)->phone }}</span></p>
+          <p>Order By  <span>{{ \App\Models\User::find($fuel->user_id)->name }}</span></p>
+          <p>Phone  <span>{{ \App\Models\User::find($fuel->user_id)->phone }}</span></p>
         <span class="headicone"><img src="{{ URL::asset('assets/img/icon/fuel.jpg') }}"></span>
       </div>
 
