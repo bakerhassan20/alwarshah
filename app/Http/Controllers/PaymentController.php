@@ -65,10 +65,10 @@ class PaymentController extends Controller
             $user = User::find(1);
 
             if($request->plane_id ==1){
-                $plan = app('rinvex.subscriptions.plan')->find($request->plane_id);
+                $plan = app('rinvex.subscriptions.plan')->find(1);
                 $user->newPlanSubscription('basic', $plan);
             }else{
-                $plan = app('rinvex.subscriptions.plan')->find($request->plane_id);
+                $plan = app('rinvex.subscriptions.plan')->find(2);
                 $user->newPlanSubscription('pro', $plan);
             }
 

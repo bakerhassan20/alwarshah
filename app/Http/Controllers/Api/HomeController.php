@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -79,6 +80,32 @@ class HomeController extends Controller
         }else{
             return response()
         ->json(['message' => ['data not found']], 404);
+        }
+    }
+
+    public function updateProfile(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'avatar'=>'required|max:255',
+
+        ]);
+
+        if($validator->fails()){
+            return response(['message'=>$validator->errors()->all()], 422);
+        }
+
+        $user = auth('sanctum')->user();
+        if($user){
+            $user->update([
+                'name'=>$request->name,
+                'avatar'=>$request->avatar,
+            ]);
+            return response()
+                ->json(['message' => ['profile updated successfully'],'data' => $user],200);
+        }else{
+            return response()
+                ->json(['message' => ['data not found']], 404);
         }
     }
 }

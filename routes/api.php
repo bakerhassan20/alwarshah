@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [HomeController::class,'Products']);
     Route::get('/product/{id}', [HomeController::class,'getProduct']);
     Route::get('/profile', [HomeController::class,'getProfile']);
+    Route::post('/updateProfile', [HomeController::class,'updateProfile']);
     Route::post('/logout', [ApiAuthController::class,'logout'])->name('logout.api');
 
     //Make Orders
