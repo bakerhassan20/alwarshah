@@ -95,7 +95,7 @@
                                             </span></td>
                                             @else
                                             <td><span class="label text-danger d-flex">
-                                                <div class="dot-label bg-danger ml-1"></div>In Process
+                                                <div class="dot-label bg-danger ml-1"></div>Pending
                                             </span></td>
                                             @endif
 
@@ -103,16 +103,16 @@
                                             <td>{{App\Models\User::find($x->driver_id)->name}}</td>
                                             @else
                                             <td><span class="label text-danger d-flex">
-                                                <div class="dot-label bg-danger ml-1"></div>In Process
+                                                <div class="dot-label bg-danger ml-1"></div>Pending
                                             </span></td>
                                             @endif
 
 
                                             @if($x->driver_id)
-                                                <td><a class="btn btn-sm btn-danger"><i class="las la-map-marker-alt la-lg"></i></a></td>
+                                                <td><a href="{{route('adminTraking')}}" class="btn btn-sm btn-danger"><i class="las la-map-marker-alt la-lg"></i></a></td>
                                             @else
                                                 <td><span class="label text-danger d-flex">
-                                                <div class="dot-label bg-danger ml-1"></div>In Process
+                                                <div class="dot-label bg-danger ml-1"></div>Pending
                                             </span></td>
                                             @endif
 

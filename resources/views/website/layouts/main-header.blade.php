@@ -32,7 +32,7 @@
                   @else
                     <div class="nav-item dropdown"style="margin-right:120px;">
                         <a class="nav-link " data-bs-toggle="dropdown">
-                        <img alt=""style="width: 40px; height: 40px;" src="{{ URL::asset('assets/img/faces/'.Auth::user()->avatar) }}">
+                        <img alt=""style="width: 40px; height: 40px;" src="{{Auth::user()->avatar }}">
                         </a>
                         <div class="dropdown-menu fade-up m-0"style="min-width:125px !important;" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{ route('profile') }}">profile</a>

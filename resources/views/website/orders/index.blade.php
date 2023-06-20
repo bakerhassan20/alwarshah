@@ -104,7 +104,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($winchOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($winchOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -155,7 +159,12 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
+
+                                @if(\App\Models\User::find($fuelOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($fuelOrder->user_id)->avatar}}" />
+                                @else
                                 <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                          <div class="card-heading">
                             <div class="row">
@@ -208,7 +217,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($repairOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($repairOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -259,7 +272,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($washOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($washOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                                    <div class="card-heading">
                             <div class="row">
@@ -315,7 +332,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($winchOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($winchOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -366,7 +387,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($fuelOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($fuelOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                          <div class="card-heading">
                             <div class="row">
@@ -419,7 +444,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($repairOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($repairOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -470,7 +499,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($washOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($washOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                                    <div class="card-heading">
                             <div class="row">
@@ -528,7 +561,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($winchOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($winchOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -579,7 +616,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($fuelOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($fuelOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                          <div class="card-heading">
                             <div class="row">
@@ -632,7 +673,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($repairOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($repairOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                             <div class="card-heading">
                             <div class="row">
@@ -683,7 +728,11 @@ if(Auth::user()->driver_type == 'wash'){
                     <div class="col-md-6 mt-5">
                         <div class="card-sl">
                             <div class="card-image">
-                                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @if(\App\Models\User::find($washOrder->user_id)->avatar)
+                                    <img src="{{\App\Models\User::find($washOrder->user_id)->avatar}}" />
+                                @else
+                                    <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                                @endif
                             </div>
                                    <div class="card-heading">
                             <div class="row">

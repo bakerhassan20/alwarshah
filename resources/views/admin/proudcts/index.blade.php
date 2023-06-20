@@ -71,7 +71,7 @@
                 <div class="card-header pb-0 col-xl-2 col-ms-2">
                     <div class="d-flex justify-content-between">
 
-                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">add slide</a>
+                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">add proudct</a>
 
                     </div>
 

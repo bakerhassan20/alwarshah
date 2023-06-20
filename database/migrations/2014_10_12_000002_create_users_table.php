@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone',11)->unique();
-            $table->string('avatar')->default("avatar.jpg");
+            $table->string('avatar')->default("https://img.freepik.com/free-icon/user_318-644324.jpg?size=626&ext=jpg&ga=GA1.2.1376264918.1675615774&semt=sph");
             $table->longText('bio')->nullable();
             $table->string('password');
             $table->json('roles_name')->default(new Expression('(JSON_ARRAY("user"))'));

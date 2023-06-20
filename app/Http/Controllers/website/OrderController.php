@@ -150,7 +150,7 @@ class OrderController extends Controller
         }
 
         $tokens = [];
-          $tokens[] = User::find($order->user_id)->device_token;
+        $tokens[] = User::find($order->user_id)->device_token;
         $response = $this->sendFirebasePush($tokens,$data);
 
 
@@ -174,6 +174,7 @@ class OrderController extends Controller
 
                  "title"=> $data['message'],
                  "body" => $data['booking_id'],
+                 "sound" => "default",
             ];
 
 	        $registrationIds = $tokens;

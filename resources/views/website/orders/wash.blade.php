@@ -4,7 +4,20 @@
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="{{URL::asset('assets/website/css/winch.css')}}" rel="stylesheet">
+<!-- leaflet css  -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        width: 100%;
+        height: 80vh;
+    }
+</style>
 @endsection
 @section('content')
 
@@ -12,16 +25,19 @@
    <div class="wave-login"></div>
       <div class="wave2-login"></div>
       <div class="wave3-login"></div>
-         <div class="container">
-        <div class="row">
-           <div style="margin-left: 90px;margin-bottom: 13px;" class="col">
-           <h4>Location :</<h4><br><br>
-           <iframe  width="700" height="240" frameborder="0" scrolling="no"marginheight="0" marginwidth="0"
-         src="https://maps.google.com/maps?q={{$wash->lat}},{{$wash->lag}}&hl=es&z=14&amp;output=embed">
-            </iframe>
-           </div>
-        </div>
-         </div>
+
+{{--         <div class="container">--}}
+{{--        <div class="row">--}}
+{{--           <div style="margin-left: 90px;margin-bottom: 13px;" class="col">--}}
+{{--           <h4>Location :</<h4><br><br>--}}
+{{--           <iframe  width="700" height="240" frameborder="0" scrolling="no"marginheight="0" marginwidth="0"--}}
+{{--         src="https://maps.google.com/maps?q={{$wash->lat}},{{$wash->lag}}&hl=es&z=14&amp;output=embed">--}}
+{{--            </iframe>--}}
+{{--           </div>--}}
+{{--        </div>--}}
+{{--         </div>--}}
+
+      <div id="map"></div>
       <main class="main-content">
 
         <h4>Description: <span style="color:#999;font-size: 18px !important;">{{ $wash->description }}</span></<h4>
@@ -39,7 +55,7 @@
         </div>
       </main>
       <div class="card-attribute">
-        <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar"/>
+        <img src="{{\App\Models\User::find($wash->user_id)->avatar}}" alt="avatar" class="small-avatar"/>
           <p>Order By  <span>{{ \App\Models\User::find($wash->user_id)->name }}</span></p>
           <p>Phone  <span>{{ \App\Models\User::find($wash->user_id)->phone }}</span></p>
         <span class="headicone"><img src="{{ URL::asset('assets/img/icon/wash.webp') }}"></span>
@@ -99,5 +115,21 @@
 
 @section('js')
 
+    <!-- leaflet js  -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Map initialization
+        var map = L.map('map').setView([27.154325,31.209059], 13);
+
+        //osm layer
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+        osm.addTo(map);
+
+        L.marker([{{$wash->lat}}, {{$wash->lag}}]).addTo(map)
+            .bindPopup('هنا')
+            .openPopup();
+    </script>
 
 @endsection
