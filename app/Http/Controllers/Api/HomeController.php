@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\FcmNotification;
 use App\Models\Slide;
 use App\Models\Product;
 use App\Models\Service;
@@ -103,6 +104,18 @@ class HomeController extends Controller
             ]);
             return response()
                 ->json(['message' => ['profile updated successfully'],'data' => $user],200);
+        }else{
+            return response()
+                ->json(['message' => ['data not found']], 404);
+        }
+    }
+
+    public function getFcmNotification(){
+        $user = auth('sanctum')->user();
+        if($user){
+              $FcmNotification = FcmNotification::where('user_id',$user->id)->orderBy('created_at', 'desc')->get();
+            return response()
+                ->json(['data' => $FcmNotification],200);
         }else{
             return response()
                 ->json(['message' => ['data not found']], 404);

@@ -662,6 +662,7 @@ class ComposerStaticInit72a70e6d3f0ae98a41578fd3f1223eb5
         'App\\Models\\ColorTheme' => __DIR__ . '/../..' . '/app/Models/ColorTheme.php',
         'App\\Models\\Companies' => __DIR__ . '/../..' . '/app/Models/Companies.php',
         'App\\Models\\CompanyServices' => __DIR__ . '/../..' . '/app/Models/CompanyServices.php',
+        'App\\Models\\FcmNotification' => __DIR__ . '/../..' . '/app/Models/FcmNotification.php',
         'App\\Models\\FuelOffer' => __DIR__ . '/../..' . '/app/Models/FuelOffer.php',
         'App\\Models\\FuelOrder' => __DIR__ . '/../..' . '/app/Models/FuelOrder.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',

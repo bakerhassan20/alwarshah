@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Models\Companies;
+use App\Models\FcmNotification;
 use App\Models\FuelOffer;
 use App\Models\FuelOrder;
 use App\Models\User;
@@ -83,6 +84,15 @@ class OrderController extends Controller
           $tokens = [];
           $tokens[] = User::find($order->user_id)->device_token;
           $response = $this->sendFirebasePush($tokens,$data);
+
+          if($response){
+              FcmNotification::create([
+                  'user_id'=>$order->user_id,
+                  'type'=>$order->type,
+                  'order_id'=>$order->id,
+                  'message'=>$data['message']
+                  ]);
+          }
         return redirect()->route('getOrders');
       }
 
@@ -106,6 +116,16 @@ class OrderController extends Controller
           $tokens = [];
           $tokens[] = User::find($order->user_id)->device_token;
           $response = $this->sendFirebasePush($tokens,$data);
+
+          if($response){
+              FcmNotification::create([
+                  'user_id'=>$order->user_id,
+                  'type'=>$order->type,
+                  'order_id'=>$order->id,
+                  'message'=>$data['message']
+              ]);
+          }
+
         return redirect()->route('getOrders');
       }
 
@@ -128,6 +148,16 @@ class OrderController extends Controller
           $tokens = [];
           $tokens[] = User::find($order->user_id)->device_token;
           $response = $this->sendFirebasePush($tokens,$data);
+
+          if($response){
+              FcmNotification::create([
+                  'user_id'=>$order->user_id,
+                  'type'=>$order->type,
+                  'order_id'=>$order->id,
+                  'message'=>$data['message']
+              ]);
+          }
+
         return redirect()->route('getOrders');
       }
 
@@ -153,6 +183,14 @@ class OrderController extends Controller
         $tokens[] = User::find($order->user_id)->device_token;
         $response = $this->sendFirebasePush($tokens,$data);
 
+          if($response){
+              FcmNotification::create([
+                  'user_id'=>$order->user_id,
+                  'type'=>$order->type,
+                  'order_id'=>$order->id,
+                  'message'=>$data['message']
+              ]);
+          }
 
         return redirect()->route('getOrders');
       }

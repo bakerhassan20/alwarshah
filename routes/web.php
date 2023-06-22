@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PaymentController;
+
 use App\Models\Service;
 use App\Http\Controllers;
 use App\Models\Companies;
@@ -13,16 +13,7 @@ use App\Http\Controllers\Website\OrderController;
 use App\Http\Controllers\website\WebsiteController;
 use App\Http\Controllers\Admin\subscriptionsController;
 use App\Http\Controllers\website\ServiceProviderController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 
 
@@ -146,14 +137,7 @@ Route::get('MarkAsRead_all','App\Http\Controllers\InvoicesController@MarkAsRead_
 
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
 
-Route::controller(PaymentController::class)
-    ->prefix('paypal')
-    ->group(function () {
-        Route::view('payment', 'paypal.index')->name('create.payment');
-        Route::post('handle-payment', 'handlePayment')->name('make.payment');
-        Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
-        Route::get('payment-success/{plane}', 'paymentSuccess')->name('success.payment');
-    });
+
 
 
 

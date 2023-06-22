@@ -48,6 +48,7 @@ return array(
     'App\\Models\\ColorTheme' => $baseDir . '/app/Models/ColorTheme.php',
     'App\\Models\\Companies' => $baseDir . '/app/Models/Companies.php',
     'App\\Models\\CompanyServices' => $baseDir . '/app/Models/CompanyServices.php',
+    'App\\Models\\FcmNotification' => $baseDir . '/app/Models/FcmNotification.php',
     'App\\Models\\FuelOffer' => $baseDir . '/app/Models/FuelOffer.php',
     'App\\Models\\FuelOrder' => $baseDir . '/app/Models/FuelOrder.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
