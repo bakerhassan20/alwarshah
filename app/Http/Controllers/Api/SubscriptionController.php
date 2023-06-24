@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Resources\SubscriptionResource;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,8 +110,8 @@ class SubscriptionController extends Controller
         $user = User::find(Auth::user()->id);
 
         $bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->get();
-
-        return response()->json(['data' => $bookingsOfSubscriber],200);
+        return  SubscriptionResource::collection($bookingsOfSubscriber);
+      // return response()->json(['data' => $bookingsOfSubscriber],200);
 
     }
 
