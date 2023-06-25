@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\FcmNotifyResource;
 use App\Models\FcmNotification;
 use App\Models\Slide;
 use App\Models\Product;
@@ -114,8 +115,8 @@ class HomeController extends Controller
         $user = auth('sanctum')->user();
         if($user){
               $FcmNotification = FcmNotification::where('user_id',$user->id)->orderBy('created_at', 'desc')->get();
-            return response()
-                ->json(['data' => $FcmNotification],200);
+            return  FcmNotifyResource::collection($FcmNotification);
+
         }else{
             return response()
                 ->json(['message' => ['data not found']], 404);
