@@ -44,7 +44,7 @@ login
             </div>
           </div><br>
           <div class="check">
-            <input type="checkbox" id="rem" name="remember" value="Boat" required {{ old('remember') ? 'checked' : '' }}/>
+            <input type="checkbox" id="rem" name="remember" value="Boat"  {{ old('remember') ? 'checked' : '' }}/>
             <label for="rem"> remember me</label>
           </div>
           <input type="submit" name="submit" class="btn" value="Login" />

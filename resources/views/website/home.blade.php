@@ -40,6 +40,24 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="carousel-item">
+                    <img class="w-100" src="{{URL::asset('assets/website/img/carousel-bg-3.png')}}" alt="Image">
+                    <div class="carousel-caption d-flex align-items-center">
+                        <div class="container">
+                            <div class="row align-items-center justify-content-center justify-content-lg-start">
+                                <div class="col-10 col-lg-7 text-center text-lg-start">
+                                    <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing //</h6>
+                                    <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Furl Service Center</h1>
+                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i class="fa fa-arrow-right ms-3"></i></a>
+                                </div>
+                                <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                 data-bs-slide="prev">
@@ -386,7 +404,7 @@
                 <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{URL::asset('assets/website/img/team-1.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{URL::asset('assets/website/img/ahmedgamal.jpg')}}" alt="">
                             <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -394,15 +412,15 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
+                            <h5 class="fw-bold mb-0">Ahmed G</h5>
+                            <small>Front End </small>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{URL::asset('assets/website/img/team-2.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{URL::asset('assets/website/img/hatem.jpg')}}" alt="">
                             <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -410,8 +428,8 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
+                            <h5 class="fw-bold mb-0">Hatem Y</h5>
+                            <small>UI/UX</small>
                         </div>
                     </div>
                 </div>
